@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Edit User</h2>
+<mat-dialog-content class="mat-typography">
+
+  <!--form-->
+  <form class="example-form" [formGroup]="editForm" novalidate>
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>name</mat-label>
+      <input matInput id="name" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>samyak_id</mat-label>
+      <input matInput id="samyak_id" formControlName="samyak_id">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>email</mat-label>
+      <input matInput id="email" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>mobile</mat-label>
+      <input matInput id="mobile_number" formControlName="mobile">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>college</mat-label>
+      <input matInput id="college" formControlName="college">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>college_id</mat-label>
+      <input matInput id="college_id" formControlName="college_id">
+    </mat-form-field>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save Changes</button>
+</mat-dialog-actions>

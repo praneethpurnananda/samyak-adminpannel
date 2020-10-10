@@ -1,0 +1,148 @@
+.msg{
+  color: #c12122;
+  text-align: center;
+  margin-top: 1%;
+}
+
+.links_section{
+margin-top: 8%;
+}
+
+.links_section .new_acc{
+  float: left;
+  cursor: pointer;
+}
+
+.links_section .forgot_password{
+  float: right;
+  cursor: pointer;
+}
+
+.spinner{
+display: block;
+margin-left: auto;
+margin-right: auto;
+margin-top: 15%;
+}
+.example-full-width-one {
+  width: 100% !important;
+  margin-bottom: 20px;
+}
+
+.login-page {
+  background-color: white;
+}
+
+.login-page main {
+  width: 100%;
+  max-width: 430px;
+  margin: 4% auto 5%
+}
+
+.login-block {
+  background-color: #fff;
+  padding: 60px;
+  -webkit-box-shadow: 0 3px 50px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 3px 50px 0 rgba(0, 0, 0, .1);
+  text-align: center;
+  border-radius: 5px
+}
+
+.login-block h1, .login-block h6 {
+  font-family: Open Sans, sans-serif;
+  /* color: #96a2b2; */
+  color: #27436a;
+  letter-spacing: 1px
+}
+
+.error_message{
+
+  margin-top: 5%;
+  font-family: Open Sans, sans-serif;
+  color: #27436a;
+  letter-spacing: 1px;
+}
+
+.login-block h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  margin-top: 30px
+}
+
+.login-block h6 {
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-top: 0
+}
+
+.login-block .form-group {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.login-block .form-control, .login-block .form-control:focus, .login-block .input-group-addon, .login-block .input-group-addon:focus {
+  background-color: transparent;
+  border: none;
+}
+
+.login-block .form-control {
+  font-size: 17px;
+  border-radius: 0px;
+}
+
+.login-block input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset;
+  -webkit-text-fill-color: #818a91;
+  -webkit-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.login-block .input-group-addon {
+  color: #29aafe;
+  font-size: 19px;
+  opacity: .5
+}
+
+.login-block .btn-block {
+  margin-top: 30px;
+  padding: 15px;
+  background: #29aafe;
+  border-color: #29aafe;
+}
+
+.login-block .hr-xs {
+  margin-top: 5px;
+  margin-bottom: 5px
+}
+
+.submit{
+  width: 100% !important;
+}
+
+
+@media (max-width:767px) {
+  body{
+    background-color: white !important;
+  }
+  .top_bar span{
+    background-color: #545b86 !important;
+  }
+  main{
+    margin-top: 20% !important;
+    padding: 0 !important;
+  }
+  .login-page main {
+    position: static;
+    top: auto;
+    left: auto;
+    -webkit-transform: none;
+    -o-transform: none;
+    transform: none;
+    padding: 30px 15px
+  }
+
+  .login-block {
+    padding: 20px
+  }
+}

@@ -1,0 +1,49 @@
+<mat-sidenav-container class="example-container"> <!---->
+  <mat-sidenav #sidenav mode="side" opened="true" style="border: none !important">
+    <div class="main">
+    <mat-list routerLink="/admin/users">Users</mat-list>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="top-bar">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <!-- <span>Samyak Admin Pannel</span> -->
+      <span class="example-spacer"></span>
+
+      <!-- <span class="search">
+        <mat-form-field class="form-field">
+        <input matInput placeholder="Placeholder">
+        </mat-form-field>
+      </span> -->
+
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [matMenuTriggerFor]="notifications">
+        <mat-icon>notifications</mat-icon>
+      </button>
+      <mat-menu #notifications="matMenu">
+
+      </mat-menu>
+      <button mat-icon-button class="example-icon right-icons" aria-label="Example icon-button with share icon" [matMenuTriggerFor]="profile">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #profile="matMenu">
+        <button mat-menu-item disabled>
+          <mat-icon>mail</mat-icon>
+          <span>praneeth.mandalemula@gmail.com</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>cached</mat-icon>
+          <span>Change password</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>login</mat-icon>
+          <span>Log out</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
