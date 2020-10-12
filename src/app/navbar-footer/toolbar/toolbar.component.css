@@ -10,10 +10,26 @@
   right: 0;
 }
 
-.main{
-  padding-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
+.side-bar{
+    border: none !important;
+    width: 15%;
+}
+
+.list{
+  cursor: pointer;
+}
+
+.list:hover{
+    background-color: #F6F5F5;
+}
+
+.list:focus{
+  outline: none;
+  border: 0;
+}
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .main mat-list{
@@ -28,4 +44,10 @@
 
 .right-icons mat-icon{
   font-size: 33px;
+}
+
+@media only screen and (max-width: 900px){
+  .side-bar{
+    width: auto !important;
+  }
 }

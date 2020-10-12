@@ -1,10 +1,10 @@
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
 
   <span class="example-spacer"></span>
   <button mat-raised-button color="primary">Add User</button>
   <span class="example-spacer"></span>
 
-</mat-toolbar>
+</mat-toolbar> -->
 <br>
 <!--data table-->
 <div class="table">
@@ -16,44 +16,44 @@
   <!-- Position Column -->
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'test': element.isDisabled}"> {{element.position}} </td>
+    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{usersData.indexOf(element) + 1}} </td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'test': element.isDisabled}"> {{element.name}} </td>
+    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.name}} </td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="samyak_id">
     <th mat-header-cell *matHeaderCellDef> Samyak id </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'test': element.isDisabled}"> {{element.samyak_id}} </td>
+    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.samyak_id}} </td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef> Email </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'test': element.isDisabled}"> {{element.email}} </td>
+    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.email}} </td>
   </ng-container>
 
 <!--book mark-->
   <!-- Symbol Column -->
   <ng-container matColumnDef="mobile">
     <th mat-header-cell *matHeaderCellDef> Mobile Number </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'test': element.isDisabled}"> {{element.mobile}} </td>
+    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.mobile}} </td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="college">
     <th mat-header-cell *matHeaderCellDef> college Name </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'test': element.isDisabled}"> {{element.college}} </td>
+    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.college}} </td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="college_id">
     <th mat-header-cell *matHeaderCellDef> College Id </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'test': element.isDisabled}"> {{element.college_id}} </td>
+    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.college_id}} </td>
   </ng-container>
 
 
@@ -62,7 +62,7 @@
   <!-- Symbol Column -->
   <ng-container matColumnDef="email_verified">
     <th mat-header-cell *matHeaderCellDef> email_verified </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'test': element.isDisabled}">
+    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}">
       <div *ngIf="element.email_verified">
         <img src="https://img.icons8.com/bubbles/40/000000/checked.png"/>
       </div>
@@ -75,7 +75,7 @@
   <!-- Symbol Column -->
   <ng-container matColumnDef="more">
     <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'test': element.isDisabled}">
+    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -88,11 +88,11 @@
           <mat-icon>info</mat-icon>
           <span>More Info</span>
         </button>
-        <button mat-menu-item *ngIf="!element.isDisabled" class="warn" (click)="disable(element)">
+        <button mat-menu-item *ngIf="element.status" class="warn" (click)="disable(element)">
           <mat-icon>block</mat-icon>
           <span>Disable</span>
         </button>
-        <button mat-menu-item *ngIf="element.isDisabled" (click)="enable(element)">
+        <button mat-menu-item *ngIf="!element.status" (click)="disable(element)">
           <mat-icon>undo</mat-icon>
           <span>Enable</span>
         </button>

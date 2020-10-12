@@ -33,11 +33,26 @@
       <mat-label>college_id</mat-label>
       <input matInput id="college_id" formControlName="college_id">
     </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>current_year</mat-label>
+      <input matInput id="current_year" formControlName="current_year">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Branch</mat-label>
+      <input matInput id="branch" formControlName="branch">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Gender</mat-label>
+      <input matInput id="gender" formControlName="gender">
+    </mat-form-field>
   </form>
   </div>
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Save Changes</button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="edit()">Save Changes</button>
 </mat-dialog-actions>

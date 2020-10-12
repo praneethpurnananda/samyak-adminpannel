@@ -16,6 +16,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatListModule} from '@angular/material/list';
 
 import { SamyakUsersComponent, EditUsers, ConformDelete, MoreInfo } from './samyak-users/samyak-users.component';
 
@@ -39,7 +40,8 @@ import { SamyakUsersComponent, EditUsers, ConformDelete, MoreInfo } from './samy
     MatTableModule,
     MatMenuModule,
     MatDialogModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatListModule
   ],
   entryComponents: [
    EditUsers,ConformDelete,MoreInfo

@@ -1,11 +1,23 @@
 <h2 mat-dialog-title>More Info</h2>
 <mat-dialog-content class="mat-typography">
   <div class="content">
-    <h3>Name : {{data.name}}</h3>
-    <h3>Email : {{data.email}}</h3>
-    <h3>Samyak id : {{data.samyak_id}}</h3>
-    <!-- <h3>Role : {{data.role}}</h3>
-    <h3>Date Joined : {{data.created}}</h3> -->
+    <mat-list role="list">
+    <mat-list-item role="listitem">Name : {{data.name}}</mat-list-item>
+    <mat-list-item role="listitem">Email : {{data.email}}</mat-list-item>
+    <mat-list-item role="listitem">Samyak id : {{data.samyak_id}}</mat-list-item>
+    <mat-list-item role="listitem">Phone number : {{data.mobile}}</mat-list-item>
+    <mat-list-item role="listitem">College name : {{data.college}}</mat-list-item>
+    <mat-list-item role="listitem">College id : {{data.college_id}}</mat-list-item>
+    <mat-list-item role="listitem">Branch : {{data.branch}}</mat-list-item>
+    <mat-list-item role="listitem">Current year : {{data.current_year}}</mat-list-item>
+    <mat-list-item role="listitem">Gender : {{data.gender}}</mat-list-item>
+    <mat-list-item role="listitem" *ngIf="!data.email_verified">Email verified : Pending</mat-list-item>
+    <mat-list-item role="listitem" *ngIf="data.email_verified">Email verified: Completed</mat-list-item>
+    <mat-list-item role="listitem" *ngIf="data.status">Status : Account Enabled</mat-list-item>
+    <mat-list-item role="listitem" *ngIf="!data.status">Status : Account Disabled</mat-list-item>
+    <mat-list-item role="listitem">Account created at : {{data.created_at}}</mat-list-item>
+    <mat-list-item role="listitem">Last updated : {{data.updated_at}}</mat-list-item>
+    </mat-list>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

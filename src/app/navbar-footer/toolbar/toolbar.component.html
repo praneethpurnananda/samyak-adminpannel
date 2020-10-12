@@ -1,24 +1,27 @@
+
 <mat-sidenav-container class="example-container"> <!---->
-  <mat-sidenav #sidenav mode="side" opened="true" style="border: none !important">
-    <div class="main">
-    <mat-list routerLink="/admin/users">Users</mat-list>
-    </div>
+  <mat-sidenav class="side-bar" #sidenav mode="side" opened="true">
+    <mat-toolbar class="side-toolbar" color="primary">
+      <!-- <mat-icon class="sidebar-space">apps</mat-icon> -->
+      <span>Navigation menu</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+    <mat-list>
+      <!-- <div mat-subheader>Folders</div> -->
+      <mat-list-item *ngFor="let item of navbarData" class="list" [routerLink]="item.link">
+        <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+        <div mat-line>{{item.title}}</div>
+        <!-- <mat-divider></mat-divider> -->
+      </mat-list-item>
+    </mat-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar class="top-bar">
+    <mat-toolbar color="primary">
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <!-- <span>Samyak Admin Pannel</span> -->
       <span class="example-spacer"></span>
-
-      <!-- <span class="search">
-        <mat-form-field class="form-field">
-        <input matInput placeholder="Placeholder">
-        </mat-form-field>
-      </span> -->
-
       <span class="example-spacer"></span>
       <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [matMenuTriggerFor]="notifications">
         <mat-icon>notifications</mat-icon>
