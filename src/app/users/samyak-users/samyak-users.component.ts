@@ -73,6 +73,19 @@ disable(element){
   )
 }
 
+permissions(element){
+  const dialogRef = this.dialog.open(SetPermissions, {
+    width: '900px',
+    data: element
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    if(result){
+      this.ngOnInit();
+    }
+  });
+}
+
 
 }
 
@@ -163,4 +176,23 @@ export class MoreInfo {
     onNoClick(): void {
     this.dialogRef.close();
   }
+}
+
+
+@Component({
+  selector: 'permissions',
+  templateUrl: 'permissions.html',
+  styleUrls: ['./samyak-users.component.css']
+})
+export class SetPermissions {
+  selected = 'option2';
+  constructor(
+    public dialogRef: MatDialogRef<SetPermissions>,
+    @Inject(MAT_DIALOG_DATA) public data){
+      console.log(data);
+    }
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+
 }

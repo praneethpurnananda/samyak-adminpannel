@@ -17,13 +17,14 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatListModule} from '@angular/material/list';
+import {MatSelectModule} from '@angular/material/select';
 
-import { SamyakUsersComponent, EditUsers, ConformDelete, MoreInfo } from './samyak-users/samyak-users.component';
+import { SamyakUsersComponent, EditUsers, ConformDelete, MoreInfo, SetPermissions} from './samyak-users/samyak-users.component';
 
 
 
 @NgModule({
-  declarations: [SamyakUsersComponent,EditUsers,ConformDelete,MoreInfo],
+  declarations: [SamyakUsersComponent,EditUsers,ConformDelete,MoreInfo,SetPermissions],
   imports: [
     CommonModule,
     BrowserModule,
@@ -41,10 +42,11 @@ import { SamyakUsersComponent, EditUsers, ConformDelete, MoreInfo } from './samy
     MatMenuModule,
     MatDialogModule,
     MatBottomSheetModule,
-    MatListModule
+    MatListModule,
+    MatSelectModule
   ],
   entryComponents: [
-   EditUsers,ConformDelete,MoreInfo
+   EditUsers,ConformDelete,MoreInfo,SetPermissions
  ],
 })
 export class UsersModule { }

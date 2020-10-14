@@ -181,35 +181,27 @@ export class EditRole {
 export class SetPermissions {
   checked: false;
 
-  roles = [
-    {
-      roleName: 'Users',
-      permissions: [
-        {name: 'Add' , checked: false},
-        {name: 'Edit' , checked: false},
-        {name: 'View' , checked: false},
-        {name: 'Delete' , checked: false}
-      ]
-    },
-    {
-      roleName: 'Events',
-      permissions: [
-        {name: 'Add' , checked: false},
-        {name: 'Edit' , checked: false},
-        {name: 'View' , checked: false},
-        {name: 'Delete' , checked: false}
-      ]
-    }
-  ]
   constructor(
     public dialogRef: MatDialogRef<SetPermissions>,
     @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
-      console.log(this.data);
+      // console.log(this.data);
     }
 
   onNoClick():void {
     this.dialogRef.close();
   }
 
-  add(){}
+  add(){
+    // console.log(this.data);
+    let tmp = {
+        roleId: this.data._id,
+        permission: this.data.permissions[0].permissions
+      };
+      // console.log(tmp);
+    this._service.setPermissions(tmp)
+    .subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    )
+  }
 }

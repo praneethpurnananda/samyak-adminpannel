@@ -13,7 +13,7 @@ table {
   margin-bottom: 2%;
 }
 
-.boxes{
+.roles{
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;

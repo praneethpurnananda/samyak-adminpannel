@@ -2,15 +2,25 @@
 <br><br>
 <mat-dialog-content class="mat-typography">
 
-  <div class="permissions" *ngFor="let item of roles">
-
-        <div style="font-size: 20px;">{{item.roleName}} : </div>
-
+  <div class="permissions">
+        <div style="font-size: 20px;">Users : </div>
     <br>
-    <div class="boxes">
-    <div class="roles" *ngFor="let permission of item.permissions">
-      <mat-checkbox class="example-margin" [(ngModel)]="permission.checked">{{permission.name}}</mat-checkbox>
+    <div class="roles">
+      <mat-checkbox class="example-margin" [(ngModel)]="data.permissions[0].permissions.Users.add">Add</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="data.permissions[0].permissions.Users.view">View</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="data.permissions[0].permissions.Users.edit">Edit</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="data.permissions[0].permissions.Users.delete">Delete</mat-checkbox>
     </div>
+  </div>
+
+  <div class="permissions">
+        <div style="font-size: 20px;">Events : </div>
+    <br>
+    <div class="roles">
+      <mat-checkbox class="example-margin" [(ngModel)]="data.permissions[0].permissions.Events.add">Add</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="data.permissions[0].permissions.Events.view">View</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="data.permissions[0].permissions.Events.edit">Edit</mat-checkbox>
+      <mat-checkbox class="example-margin" [(ngModel)]="data.permissions[0].permissions.Events.delete">Delete</mat-checkbox>
     </div>
   </div>
 

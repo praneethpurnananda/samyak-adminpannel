@@ -77,4 +77,11 @@ export class AdminServiceService {
     });
   }
 
+  setPermissions(body: any){
+    return this._http.post(this.backendService+'/roles/manage-permissions', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
 }
