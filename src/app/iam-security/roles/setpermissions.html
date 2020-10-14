@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Set Permissions for {{data.name}}</h2>
+<br><br>
+<mat-dialog-content class="mat-typography">
+
+  <div class="permissions" *ngFor="let item of roles">
+
+        <div style="font-size: 20px;">{{item.roleName}} : </div>
+
+    <br>
+    <div class="boxes">
+    <div class="roles" *ngFor="let permission of item.permissions">
+      <mat-checkbox class="example-margin" [(ngModel)]="permission.checked">{{permission.name}}</mat-checkbox>
+    </div>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="add()">Save Permissions</button>
+</mat-dialog-actions>

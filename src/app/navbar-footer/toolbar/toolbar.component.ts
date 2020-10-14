@@ -12,7 +12,7 @@ export class ToolbarComponent implements OnInit {
   navbarData = [
     {title: 'Dashboard' , icon: 'dashboard' , link: '/admin/dashboard'},
     {title: 'Users' , icon: 'face' , link: "/admin/users"},
-    {title: 'IAM & Security' , icon: 'admin_panel_settings' , link: ''},
+    {title: 'IAM & Security' , icon: 'admin_panel_settings' , link: '/admin/security'},
     {title: 'Event Management' , icon: 'event' , link: ''}
   ]
   constructor(private router: Router,private route: ActivatedRoute) { }

@@ -11,6 +11,7 @@ import { OwnFormsModule } from "./forms/forms.module";
 import { NavbarFooterModule } from "./navbar-footer/navbar-footer.module";
 import { MainModuleModule } from "./main-module/main-module.module";
 import { UsersModule } from "./users/users.module";
+import { IamSecurityModule } from "./iam-security/iam-security.module";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UsersModule } from "./users/users.module";
     HttpClientModule,
     NavbarFooterModule,
     MainModuleModule,
-    UsersModule
+    UsersModule,
+    IamSecurityModule
   ],
   providers: [],
   bootstrap: [AppComponent]

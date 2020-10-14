@@ -87,7 +87,8 @@ export class ConformDelete {
   }
 
   deleteUser(){
-    this._service.deleteUser(this.data.userId)
+    let tmp  = {userId : this.data.userId};
+    this._service.deleteUser(tmp)
     .subscribe(
       data => console.log(data),
       error => console.log(error)
