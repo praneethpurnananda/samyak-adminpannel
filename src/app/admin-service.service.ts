@@ -12,9 +12,18 @@ export class AdminServiceService {
   constructor(private _http: HttpClient) { }
 
   login(body: any){
-      return this._http.post(this.backendService+'/administration/login', body,{
+      return this._http.post(this.backendService+'/users/login', body,{
           observe: 'body'
       });
+  }
+
+  //permissions
+  userPageAccess(body: any){
+    console.log(body);
+    return this._http.post(this.backendService+'/roles/check-permission', body ,{
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
   }
 
   getAllUsers():Observable<object>{
@@ -83,5 +92,33 @@ export class AdminServiceService {
       headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
     });
   }
+
+  userRoles():Observable<object>{
+    return this._http.get(this.backendService+'/roles/all-UserRoles', {
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  addUserRole(body: any){
+    return this._http.post(this.backendService+'/roles/add-UserRole', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  deleteUserRole(body: any){
+    return this._http.post(this.backendService+'/roles/delete-UserRole', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  addEventType(body: any){
+    return this._http.post(this.backendService+'/events/add-eventType', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
 
 }

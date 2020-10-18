@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Add New Event</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="event-form">
+    <form class="example-form" [formGroup]="addEvent" novalidate>
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Event Name</mat-label>
+        <input matInput id="event-name" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Department</mat-label>
+        <input matInput id="department" formControlName="department">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Organiser Name</mat-label>
+        <input matInput id="organiser" formControlName="organiser">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput id="description" formControlName="description">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Event Link</mat-label>
+        <input matInput id="link" formControlName="attending_link">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Venue</mat-label>
+        <input matInput id="venue" formControlName="venue">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Registration Price</mat-label>
+        <input matInput id="price" formControlName="registration_price">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Event Type</mat-label>
+        <input matInput id="event-type" formControlName="type">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Event Code</mat-label>
+        <input matInput id="code" formControlName="code">
+      </mat-form-field>
+
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="add()">Add Event</button>
+</mat-dialog-actions>

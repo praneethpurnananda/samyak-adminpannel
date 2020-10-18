@@ -1,0 +1,23 @@
+.btns{
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-right: 2%;
+  margin-top: 2%;
+}
+
+.btns button{
+  margin-left: 2%;
+}
+
+
+.event-form{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.event-form .example-full-width-one{
+  width: 20%;
+  padding: 20px;
+}

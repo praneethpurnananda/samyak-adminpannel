@@ -12,6 +12,10 @@ import { NavbarFooterModule } from "./navbar-footer/navbar-footer.module";
 import { MainModuleModule } from "./main-module/main-module.module";
 import { UsersModule } from "./users/users.module";
 import { IamSecurityModule } from "./iam-security/iam-security.module";
+import { EventsModule } from "./events/events.module"
+
+//guards
+import { AuthGuard } from "./auth.guard";
 
 @NgModule({
   declarations: [
@@ -26,9 +30,10 @@ import { IamSecurityModule } from "./iam-security/iam-security.module";
     NavbarFooterModule,
     MainModuleModule,
     UsersModule,
-    IamSecurityModule
+    IamSecurityModule,
+    EventsModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

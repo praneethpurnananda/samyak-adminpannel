@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from "./auth.guard";
 
 import { LoginComponent } from "./forms/login/login.component";
 import { ToolbarComponent } from "./navbar-footer/toolbar/toolbar.component";
 import { DashboardComponent } from './main-module/dashboard/dashboard.component';
 import { SamyakUsersComponent } from "./users/samyak-users/samyak-users.component";
 import { RolesComponent } from "./iam-security/roles/roles.component";
+import { SamyakEventsComponent } from "./events/samyak-events/samyak-events.component";
 
 const routes: Routes = [
   {path: '' , component: LoginComponent},
@@ -14,8 +16,9 @@ const routes: Routes = [
     component: ToolbarComponent,
     children: [
       {path: 'dashboard', component: DashboardComponent},
-      {path: 'users', component: SamyakUsersComponent},
-      {path: 'security', component: RolesComponent}
+      {path: 'users', component: SamyakUsersComponent , canActivate: [AuthGuard]},
+      {path: 'security', component: RolesComponent},
+      {path: 'events', component: SamyakEventsComponent}
     ]
   }
 ];

@@ -13,7 +13,7 @@ export class ToolbarComponent implements OnInit {
     {title: 'Dashboard' , icon: 'dashboard' , link: '/admin/dashboard'},
     {title: 'Users' , icon: 'face' , link: "/admin/users"},
     {title: 'IAM & Security' , icon: 'admin_panel_settings' , link: '/admin/security'},
-    {title: 'Event Management' , icon: 'event' , link: ''}
+    {title: 'Event Management' , icon: 'event' , link: '/admin/events'}
   ]
   constructor(private router: Router,private route: ActivatedRoute) { }
 

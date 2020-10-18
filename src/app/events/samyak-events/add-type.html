@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Add New Role</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="form">
+    <form class="example-form" [formGroup]="addEventType" novalidate>
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Add New Event Type</mat-label>
+        <input matInput id="type-name" formControlName="typeName">
+      </mat-form-field>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="addType()">Add Type</button>
+</mat-dialog-actions>

@@ -3,16 +3,14 @@
   <mat-form-field appearance="fill">
   <mat-label>Select an option</mat-label>
   <mat-select [(value)]="selected">
-    <mat-option>None</mat-option>
-    <mat-option value="option1">Option 1</mat-option>
-    <mat-option value="option2">Option 2</mat-option>
-    <mat-option value="option3">Option 3</mat-option>
+    <mat-option value="none">None</mat-option>
+    <mat-option *ngFor="let item of data.allRoles" [value]="item._id">{{item.name}}</mat-option>
   </mat-select>
 </mat-form-field>
 
-<p>You selected: {{selected}}</p>
+<p>Role Assigned : {{data.role}}</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Save Changes</button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="addRole()">Save Changes</button>
 </mat-dialog-actions>

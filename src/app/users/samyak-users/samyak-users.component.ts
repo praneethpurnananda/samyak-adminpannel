@@ -14,6 +14,8 @@ export class SamyakUsersComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name' ,'samyak_id', 'email', 'mobile' , 'college' , 'college_id' , 'email_verified', 'more'];
   usersData;
   dataSource;
+  userRoles;
+  allRolesData;
   constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private _service: AdminServiceService) { }
 
   ngOnInit(): void {
@@ -26,6 +28,24 @@ export class SamyakUsersComponent implements OnInit {
       },
       error => console.log(error)
     );
+
+    this._service.userRoles()
+    .subscribe(
+      data => {
+        this.userRoles = data['user_roles'];
+        console.log(data);
+      },
+      error => console.log(error)
+    );
+
+    this._service.getRoles()
+    .subscribe(
+      data => {
+        this.allRolesData = data['roles'];
+        console.log(data);
+      },
+      error => console.log(error)
+    )
   }
 
 edit(element){
@@ -74,9 +94,19 @@ disable(element){
 }
 
 permissions(element){
+  let r = this.userRoles.find(x => x.user_id == element._id);
+  let tmp;
+  if(r){
+     let role = this.allRolesData.find(x => x._id == r.role_id);
+     tmp = {id: element._id , role: role.name , allRoles: this.allRolesData};
+     console.log("inside if");
+  }
+  else{
+     tmp = {id: element._id , role: 'none' , allRoles: this.allRolesData};
+  }
   const dialogRef = this.dialog.open(SetPermissions, {
     width: '900px',
-    data: element
+    data: tmp
   });
   dialogRef.afterClosed().subscribe(result => {
     console.log('The dialog was closed');
@@ -185,14 +215,41 @@ export class MoreInfo {
   styleUrls: ['./samyak-users.component.css']
 })
 export class SetPermissions {
-  selected = 'option2';
+  selected;
   constructor(
     public dialogRef: MatDialogRef<SetPermissions>,
-    @Inject(MAT_DIALOG_DATA) public data){
+    @Inject(MAT_DIALOG_DATA) public data , private _service: AdminServiceService){
       console.log(data);
+      if(this.data.role == 'none'){
+        console.log('none');
+      }
+      else{
+        this.selected = this.data.role;
+      }
     }
+
     onNoClick(): void {
       this.dialogRef.close();
+    }
+
+    addRole(){
+      if(this.selected == "none"){
+        let tmp  = {userId: this.data.id};
+        this._service.deleteUserRole(tmp)
+        .subscribe(
+          data => console.log(data),
+          error => console.log(error)
+        )
+      }
+      else{
+      let tmp = {userId: this.data.id , RoleId: this.selected};
+      console.log(tmp);
+      this._service.addUserRole(tmp)
+      .subscribe(
+        data => console.log(data),
+        error => console.log(error)
+      );
+    }
     }
 
 }
