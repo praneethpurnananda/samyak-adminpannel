@@ -13,13 +13,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatListModule} from '@angular/material/list';
+import {MatSelectModule} from '@angular/material/select';
 
-import { SamyakEventsComponent,AddEventType,AddEvent} from './samyak-events/samyak-events.component';
+import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType} from './samyak-events/samyak-events.component';
 
 
 
 @NgModule({
-  declarations: [SamyakEventsComponent,AddEventType,AddEvent],
+  declarations: [SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType],
   imports: [
     CommonModule,
     BrowserModule,
@@ -33,8 +35,10 @@ import { SamyakEventsComponent,AddEventType,AddEvent} from './samyak-events/samy
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule,
+    MatSelectModule
   ],
-  providers: [AddEventType,AddEvent],
+  providers: [AddEventType,AddEvent,DisplayEventType],
 })
 export class EventsModule { }

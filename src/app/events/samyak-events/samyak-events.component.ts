@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirective} from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AdminServiceService } from "../../admin-service.service";
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-samyak-events',
@@ -10,9 +11,33 @@ import { AdminServiceService } from "../../admin-service.service";
 })
 export class SamyakEventsComponent implements OnInit {
 
+  @ViewChild('myInput') myInputVariable: ElementRef;
+  allEventTypes;
+  allEvents;
+  displayedColumns: string[] = ['position', 'name' ,'code', 'department', 'multiple_events_allowed' , 'organiser' , 'registration_price' , 'status', 'time'];
+  dataSource;
+  selectedFile = null;
   constructor(public dialog: MatDialog,private _service: AdminServiceService) { }
 
   ngOnInit(): void {
+    this._service.viewEventTypes()
+    .subscribe(
+      data => {
+        console.log(data)
+        this.allEventTypes = data;
+      },
+      error => console.log(error)
+    );
+
+    this._service.allEvents()
+    .subscribe(
+      data => {
+        console.log(data)
+        this.allEvents = data;
+        this.dataSource = this.allEvents;
+      },
+      error => console.log(error)
+    );
   }
 
   addEventType(){
@@ -28,7 +53,7 @@ export class SamyakEventsComponent implements OnInit {
   displayEventTypes(){
     const dialogRef = this.dialog.open(DisplayEventType, {
       width: '700px',
-      data: {title: 'Add New Event Type'},
+      data: this.allEventTypes,
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log("dialog was closed");
@@ -38,7 +63,7 @@ export class SamyakEventsComponent implements OnInit {
   addEvent(){
     const dialogRef = this.dialog.open(AddEvent, {
       width: '900px',
-      data: {title: 'Add New Event'},
+      data: this.allEventTypes,
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log("dialog was closed");
@@ -46,6 +71,24 @@ export class SamyakEventsComponent implements OnInit {
         this.ngOnInit();
       }
     });
+  }
+
+  addcsv(){
+    let formData:FormData = new FormData();
+    console.log("added");
+    formData.append('newfile', this.selectedFile);
+    // let fileData = {'newfile': this.selectedFile};
+    this._service.uploadEventCsv(formData)
+    .subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    );
+
+  }
+
+  onFileInput(event){
+    console.log("eevnt teiggerd");
+    this.selectedFile = event.target.files[0];
   }
 
 }
@@ -93,7 +136,7 @@ export class DisplayEventType {
   constructor(
     public dialogRef: MatDialogRef<DisplayEventType>,
     @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
-
+      console.log(data);
     }
     onNoClick(): void{
       this.dialogRef.close();
@@ -111,6 +154,14 @@ export class DisplayEventType {
 export class AddEvent {
 
   addEvent: FormGroup;
+  departments = [
+    {value: 'cse' , viewValue: 'CSE'},
+    {value: 'ece' , viewValue: 'ECE'}
+  ];
+  multiple_events_allowed = [
+    {viewValue: 'Allowed' , value: 1},
+    {viewValue: 'Not Allowed' , value: 0}
+  ];
   constructor(
     public dialogRef: MatDialogRef<AddEvent>,
     @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
@@ -133,5 +184,11 @@ export class AddEvent {
       this.dialogRef.close();
     }
 
-    add(){}
+    add(){
+      this._service.addEvent(this.addEvent.value)
+      .subscribe(
+        data => console.log(data),
+        error => console.log(error)
+      );
+    }
 }

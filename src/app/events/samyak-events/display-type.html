@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Add New Event</h2>
+<mat-dialog-content class="mat-typography">
+<mat-list>
+  <div mat-subheader>Folders</div>
+  <mat-list-item *ngFor="let item of data">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <div mat-line>{{item.name}}</div>
+  </mat-list-item>
+</mat-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <!-- <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Add Event</button> -->
+</mat-dialog-actions>

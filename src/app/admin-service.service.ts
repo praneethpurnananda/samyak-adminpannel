@@ -120,5 +120,31 @@ export class AdminServiceService {
     });
   }
 
+  viewEventTypes():Observable<object>{
+    return this._http.get(this.backendService+'/events/all-eventTypes', {
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  addEvent(body: any){
+    return this._http.post(this.backendService+'/events/add-event', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  allEvents():Observable<object>{
+    return this._http.get(this.backendService+'/events/all-events', {
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  uploadEventCsv(body: any){
+    console.log(body);
+    return this._http.post(this.backendService+'/events/add-csvEvents', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
 
 }

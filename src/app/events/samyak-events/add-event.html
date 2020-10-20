@@ -9,7 +9,11 @@
 
       <mat-form-field class="example-full-width-one" appearance="outline">
         <mat-label>Department</mat-label>
-        <input matInput id="department" formControlName="department">
+        <mat-select formControlName="department">
+          <mat-option *ngFor="let item of departments" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field class="example-full-width-one" appearance="outline">
@@ -23,6 +27,15 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Multiple Events Allowed</mat-label>
+        <mat-select formControlName="multiple_events_allowed">
+          <mat-option *ngFor="let item of multiple_events_allowed" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
         <mat-label>Event Link</mat-label>
         <input matInput id="link" formControlName="attending_link">
       </mat-form-field>
@@ -33,13 +46,22 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Time and Date</mat-label>
+        <input matInput id="time" formControlName="time">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
         <mat-label>Registration Price</mat-label>
         <input matInput id="price" formControlName="registration_price">
       </mat-form-field>
 
       <mat-form-field class="example-full-width-one" appearance="outline">
         <mat-label>Event Type</mat-label>
-        <input matInput id="event-type" formControlName="type">
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let item of data" [value]="item._id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field class="example-full-width-one" appearance="outline">
