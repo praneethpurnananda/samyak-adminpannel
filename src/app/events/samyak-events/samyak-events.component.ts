@@ -155,6 +155,7 @@ export class AddEvent {
     {viewValue: 'Allowed' , value: 1},
     {viewValue: 'Not Allowed' , value: 0}
   ];
+
   constructor(
     public dialogRef: MatDialogRef<AddEvent>,
     @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
@@ -165,24 +166,42 @@ export class AddEvent {
         organiser: ['', Validators.required],
         description: ['', Validators.required],
         multiple_events_allowed: ['', Validators.required],
-        time: '',
         attending_link: '',
         venue: ['', Validators.required],
         registration_price: ['', Validators.required],
         type: ['', Validators.required],
-        code: ['', Validators.required]
+        code: ['', Validators.required],
+        day1_event: [{value: false , disabled: false}, Validators.required],
+        day2_event: [{value: false , disabled: false}, Validators.required],
+        day3_event: [{value: false , disabled: false}, Validators.required],
+        day1_start_time:  [{value: '' , disabled: false}],
+        day1_end_time: '',
+        day1_date: '',
+        day2_start_time: '',
+        day2_end_time: '',
+        day2_date: '',
+        day3_start_time: '',
+        day3_end_time: '',
+        day3_date: ''
       });
     }
+
+
+    disableOne(){};
+    disableTwo(){};
+    disableThree(){};
+
     onNoClick(): void{
       this.dialogRef.close();
     }
 
     add(){
-      this._service.addEvent(this.addEvent.value)
-      .subscribe(
-        data => console.log(data),
-        error => console.log(error)
-      );
+      console.log(this.addEvent.value);
+      // this._service.addEvent(this.addEvent.value)
+      // .subscribe(
+      //   data => console.log(data),
+      //   error => console.log(error)
+      // );
     }
 }
 

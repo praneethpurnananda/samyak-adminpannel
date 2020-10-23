@@ -15,6 +15,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile} from './samyak-events/samyak-events.component';
 
@@ -37,7 +39,9 @@ import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile
     MatCheckboxModule,
     MatDialogModule,
     MatListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [AddEventType,AddEvent,DisplayEventType,AddCsvFile],
 })
