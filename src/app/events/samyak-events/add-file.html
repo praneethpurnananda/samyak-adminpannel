@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Upload CSV File</h2>
+<mat-dialog-content class="mat-typography">
+   <input type="file" (change)="onFileInput($event)" placeholder="Upload file" accept=".csv">
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="addcsv()">Upload File</button>
+</mat-dialog-actions>

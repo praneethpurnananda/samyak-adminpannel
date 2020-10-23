@@ -16,12 +16,12 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 
-import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType} from './samyak-events/samyak-events.component';
+import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile} from './samyak-events/samyak-events.component';
 
 
 
 @NgModule({
-  declarations: [SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType],
+  declarations: [SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile],
   imports: [
     CommonModule,
     BrowserModule,
@@ -39,6 +39,6 @@ import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType} from './s
     MatListModule,
     MatSelectModule
   ],
-  providers: [AddEventType,AddEvent,DisplayEventType],
+  providers: [AddEventType,AddEvent,DisplayEventType,AddCsvFile],
 })
 export class EventsModule { }

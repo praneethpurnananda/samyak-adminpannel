@@ -10,13 +10,10 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./samyak-events.component.css']
 })
 export class SamyakEventsComponent implements OnInit {
-
-  @ViewChild('myInput') myInputVariable: ElementRef;
   allEventTypes;
   allEvents;
   displayedColumns: string[] = ['position', 'name' ,'code', 'department', 'multiple_events_allowed' , 'organiser' , 'registration_price' , 'status', 'time'];
   dataSource;
-  selectedFile = null;
   constructor(public dialog: MatDialog,private _service: AdminServiceService) { }
 
   ngOnInit(): void {
@@ -74,22 +71,18 @@ export class SamyakEventsComponent implements OnInit {
   }
 
   addcsv(){
-    let formData:FormData = new FormData();
-    console.log("added");
-    formData.append('newfile', this.selectedFile);
-    // let fileData = {'newfile': this.selectedFile};
-    this._service.uploadEventCsv(formData)
-    .subscribe(
-      data => console.log(data),
-      error => console.log(error)
-    );
-
+      const dialogRef = this.dialog.open(AddCsvFile, {
+        width: '550px',
+        data: {title: 'Upload File'},
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if(result){
+          this.ngOnInit();
+        }
+      });
   }
 
-  onFileInput(event){
-    console.log("eevnt teiggerd");
-    this.selectedFile = event.target.files[0];
-  }
+
 
 }
 
@@ -191,4 +184,37 @@ export class AddEvent {
         error => console.log(error)
       );
     }
+}
+
+//add-files
+@Component({
+  selector: 'add-file',
+  templateUrl: 'add-file.html',
+  styleUrls: ['./samyak-events.component.css']
+})
+export class AddCsvFile {
+    selectedFile = null;
+  constructor(
+    public dialogRef: MatDialogRef<AddCsvFile>,
+      @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){}
+
+      onNoClick(): void{
+        this.dialogRef.close();
+      }
+
+      addcsv(){
+        let formData:FormData = new FormData();
+        console.log("added");
+        formData.append('newfile', this.selectedFile);
+        this._service.uploadEventCsv(formData)
+        .subscribe(
+          data => console.log(data),
+          error => console.log(error)
+        );
+      }
+
+      onFileInput(event){
+        console.log("eevnt teiggerd");
+        this.selectedFile = event.target.files[0];
+      }
 }

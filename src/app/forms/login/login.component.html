@@ -5,7 +5,8 @@
 
     <form class="sign-in example-form" [formGroup]="loginForm" novalidate>
       <div class="login-block">
-        <h1 class="login_title">Samyak</h1>
+        <img src="https://klsamyak.in/images/samyak2.png" alt="" height="80" width="80">
+        <h1 class="login_title">Samyak Admin Login</h1>
         <mat-form-field class="example-full-width-one" appearance="outline">
           <mat-label>Email</mat-label>
           <input matInput id="email"  formControlName="email" placeholder="Samyak@gmail.com">
@@ -30,7 +31,7 @@
         <!--submit button-->
         <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" [disabled]="!loginForm.valid" type="submit" (click)="login()">Login</button>
         <div class="links_section">
-          <span class="new_acc">
+          <span class="new_acc" routerLink="/forgotpassword">
             Forgot Password?
           </span>
           </div>

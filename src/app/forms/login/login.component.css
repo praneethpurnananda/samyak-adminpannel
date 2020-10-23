@@ -18,12 +18,6 @@ margin-top: 8%;
   cursor: pointer;
 }
 
-.spinner{
-display: block;
-margin-left: auto;
-margin-right: auto;
-margin-top: 15%;
-}
 .example-full-width-one {
   width: 100% !important;
   margin-bottom: 20px;
@@ -36,16 +30,26 @@ margin-top: 15%;
 .login-page main {
   width: 100%;
   max-width: 430px;
-  margin: 4% auto 5%
+  margin: 7% auto 5%;
+}
+
+.new_acc:focus{
+  outline: none !important;
+  border: 0 !important;
 }
 
 .login-block {
   background-color: #fff;
-  padding: 60px;
+  padding:  60px;
+  padding-top: 0px !important;
   -webkit-box-shadow: 0 3px 50px 0 rgba(0, 0, 0, .1);
   box-shadow: 0 3px 50px 0 rgba(0, 0, 0, .1);
   text-align: center;
   border-radius: 5px
+}
+
+.login-block img{
+  margin-top: 4%;
 }
 
 .login-block h1, .login-block h6 {
@@ -66,7 +70,7 @@ margin-top: 15%;
 .login-block h1 {
   font-size: 22px;
   margin-bottom: 20px;
-  margin-top: 30px
+  margin-top: 5px
 }
 
 .login-block h6 {

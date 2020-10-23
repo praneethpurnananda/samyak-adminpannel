@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from "./auth.guard";
 
 import { LoginComponent } from "./forms/login/login.component";
+import { ForgotPasswordComponent } from "./forms/forgot-password/forgot-password.component";
 import { ToolbarComponent } from "./navbar-footer/toolbar/toolbar.component";
 import { DashboardComponent } from './main-module/dashboard/dashboard.component';
 import { SamyakUsersComponent } from "./users/samyak-users/samyak-users.component";
@@ -11,6 +12,7 @@ import { SamyakEventsComponent } from "./events/samyak-events/samyak-events.comp
 
 const routes: Routes = [
   {path: '' , component: LoginComponent},
+  {path: 'forgotpassword' , component: ForgotPasswordComponent},
   {
     path: 'admin',
     component: ToolbarComponent,
