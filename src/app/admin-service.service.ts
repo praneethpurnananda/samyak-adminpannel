@@ -153,4 +153,11 @@ export class AdminServiceService {
     });
   }
 
+  deleteEvent(body: any){
+    return this._http.post(this.backendService+'/events/delete-event', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
 }

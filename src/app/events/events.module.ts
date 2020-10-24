@@ -17,13 +17,14 @@ import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
 
-import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile} from './samyak-events/samyak-events.component';
+import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent} from './samyak-events/samyak-events.component';
 
 
 
 @NgModule({
-  declarations: [SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile],
+  declarations: [SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -41,8 +42,9 @@ import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile
     MatListModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
-  providers: [AddEventType,AddEvent,DisplayEventType,AddCsvFile],
+  providers: [AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent],
 })
 export class EventsModule { }

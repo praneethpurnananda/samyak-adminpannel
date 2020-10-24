@@ -1,0 +1,142 @@
+<h2 mat-dialog-title>Edit Event</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="edit-form">
+      <form class="example-form" [formGroup]="editEventsForm" novalidate>
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Event Name</mat-label>
+          <input matInput id="name" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Event Code</mat-label>
+          <input matInput id="code" formControlName="code">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Department</mat-label>
+          <mat-select formControlName="department">
+            <mat-option *ngFor="let item of departments" [value]="item.value">
+              {{item.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Organiser SamyakId</mat-label>
+          <input matInput id="organiser" formControlName="organiser">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Registration Price</mat-label>
+          <input matInput id="registration_price" formControlName="registration_price">
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Venue</mat-label>
+          <input matInput id="venue" formControlName="venue">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Multiple Events Allowed</mat-label>
+          <mat-select formControlName="multiple_events_allowed">
+            <mat-option *ngFor="let item of multiple_events_allowed" [value]="item.value">
+              {{item.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Event Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let item of data.allEventTypes" [value]="item._id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Event Link</mat-label>
+          <input matInput id="link" formControlName="attending_link">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline" style="width: 80%;">
+          <mat-label>Description</mat-label>
+          <textarea  matInput id="description" formControlName="description"></textarea>
+        </mat-form-field>
+
+        <br>
+
+        <mat-checkbox formControlName="day1_event">Day-1</mat-checkbox>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Start Time</mat-label>
+          <input matInput type="time" id="time1" formControlName="day1_start_time">
+          <mat-hint>Time Format Shoud be 24 Hours </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>End Time</mat-label>
+          <input matInput type="time" id="time2" formControlName="day1_end_time">
+          <mat-hint>Time Format Shoud be 24 Hours</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Day-1 Date</mat-label>
+          <input matInput [matDatepicker]="dp1" formControlName="day1_date" >
+          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+          <mat-datepicker #dp1></mat-datepicker>
+        </mat-form-field>
+
+        <br>
+
+        <mat-checkbox formControlName="day2_event">Day-2</mat-checkbox>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Start Time</mat-label>
+          <input matInput type="time" id="time3" formControlName="day2_start_time" >
+          <mat-hint>Time Format Shoud be 24 Hours </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>End Time</mat-label>
+          <input matInput type="time" id="time4" formControlName="day2_end_time">
+          <mat-hint>Time Format Shoud be 24 Hours </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Day-2 Date</mat-label>
+          <input matInput [matDatepicker]="dp2" formControlName="day2_date" >
+          <mat-datepicker-toggle matSuffix [for]="dp2" ></mat-datepicker-toggle>
+          <mat-datepicker #dp2></mat-datepicker>
+        </mat-form-field>
+
+        <br>
+
+        <mat-checkbox formControlName="day3_event">Day-3</mat-checkbox>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Start Time</mat-label>
+          <input matInput type="time" id="time5" formControlName="day3_start_time" >
+          <mat-hint>Time Format Shoud be 24 Hours </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>End Time</mat-label>
+          <input matInput type="time" id="time6" formControlName="day3_end_time" >
+          <mat-hint>Time Format Shoud be 24 Hours </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Day-3 Date</mat-label>
+          <input matInput [matDatepicker]="dp3" formControlName="day3_date" >
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3></mat-datepicker>
+        </mat-form-field>
+
+
+
+
+      </form>
+  </div>
+</mat-dialog-content>

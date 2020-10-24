@@ -12,7 +12,7 @@ import { saveAs } from 'file-saver';
 export class SamyakEventsComponent implements OnInit {
   allEventTypes;
   allEvents;
-  displayedColumns: string[] = ['position', 'name' ,'code', 'department', 'multiple_events_allowed' , 'organiser' , 'registration_price' , 'status', 'time'];
+  displayedColumns: string[] = ['position', 'name' ,'code', 'department', 'multiple_events_allowed' , 'organiser' , 'registration_price' , 'status', 'more'];
   dataSource;
   constructor(public dialog: MatDialog,private _service: AdminServiceService) { }
 
@@ -80,6 +80,32 @@ export class SamyakEventsComponent implements OnInit {
           this.ngOnInit();
         }
       });
+  }
+
+  edit(element){
+    let tmp = {formdata: element , allEventTypes: this.allEventTypes};
+    const dialogRef = this.dialog.open(EditEvent, {
+      width: '990px',
+      data: tmp,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.ngOnInit();
+      }
+    });
+  }
+  moreinfo(element){}
+
+  conformDelete(element){
+    const dialogRef = this.dialog.open(DeleteEvent, {
+      width: '550px',
+      data: element,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.ngOnInit();
+      }
+    });
   }
 
 
@@ -236,4 +262,86 @@ export class AddCsvFile {
         console.log("eevnt teiggerd");
         this.selectedFile = event.target.files[0];
       }
+}
+
+//delete
+@Component({
+  selector: 'delete-event',
+  templateUrl: 'delete.html',
+  styleUrls: ['./samyak-events.component.css']
+})
+export class DeleteEvent {
+
+  constructor(
+    public dialogRef: MatDialogRef<DeleteEvent>,
+      @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){}
+
+  onNoClick(): void{
+    this.dialogRef.close();
+  }
+
+  delete(){
+    let tmp = {eventId: this.data._id};
+    this._service.deleteEvent(tmp)
+    .subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    )
+  }
+}
+
+//edit
+@Component({
+  selector: 'edit-event',
+  templateUrl: 'edit-event.html',
+  styleUrls: ['../../users/samyak-users/samyak-users.component.css']
+})
+export class EditEvent {
+
+  editEventsForm: FormGroup;
+  departments = [
+    {value: 'cse' , viewValue: 'CSE'},
+    {value: 'ece' , viewValue: 'ECE'}
+  ];
+  multiple_events_allowed = [
+    {viewValue: 'Allowed' , value: 1},
+    {viewValue: 'Not Allowed' , value: 0}
+  ];
+
+
+  constructor(
+    public dialogRef: MatDialogRef<EditEvent>,
+      @Inject(MAT_DIALOG_DATA) public data,private fb: FormBuilder, private _service: AdminServiceService){
+        console.log(this.data);
+
+        this.editEventsForm = this.fb.group({
+          name: [{value: data.formdata.name , disabled: false}, Validators.required],
+          code: [{value: data.formdata.code , disabled: false}, Validators.required],
+          department: [{value: data.formdata.department , disabled: false}, Validators.required],
+          organiser: [{value: data.formdata.organiser , disabled: false}, Validators.required],
+          registration_price: [{value: data.formdata.registration_price , disabled: false}, Validators.required],
+          description: [{value: data.formdata.description , disabled: false}, Validators.required],
+          venue: [{value: data.formdata.venue , disabled: false}, Validators.required],
+          multiple_events_allowed: [{value: data.formdata.multiple_events_allowed , disabled: false}, Validators.required],
+          type: [{value: data.formdata.type[0]._id , disabled: false}, Validators.required],
+          attending_link: [{value: data.formdata.attending_link , disabled: false}, Validators.required],
+          day1_event: [{value: data.formdata.time.day1.event , disabled: false}],
+          day2_event: [{value: data.formdata.time.day2.event , disabled: false}],
+          day3_event: [{value: data.formdata.time.day3.event , disabled: false}],
+          day1_start_time: [{value: data.formdata.time.day1.start_time , disabled: false}],
+          day1_end_time: '',
+          day1_date: '',
+          day2_start_time: '',
+          day2_end_time: '' ,
+          day2_date: '',
+          day3_start_time: '',
+          day3_end_time: '',
+          day3_date: ''
+        });
+        console.log(data.formdata.time.day1.start_time);
+      }
+  onNoClick(): void{
+    this.dialogRef.close();
+  }
+
 }
