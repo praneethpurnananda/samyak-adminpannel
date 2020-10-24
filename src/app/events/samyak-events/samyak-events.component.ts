@@ -171,10 +171,10 @@ export class AddEvent {
         registration_price: ['', Validators.required],
         type: ['', Validators.required],
         code: ['', Validators.required],
-        day1_event: [{value: false , disabled: false}, Validators.required],
-        day2_event: [{value: false , disabled: false}, Validators.required],
-        day3_event: [{value: false , disabled: false}, Validators.required],
-        day1_start_time:  [{value: '' , disabled: false}],
+        day1_event: [{value: false , disabled: false}],
+        day2_event: [{value: false , disabled: false}],
+        day3_event: [{value: false , disabled: false}],
+        day1_start_time: '',
         day1_end_time: '',
         day1_date: '',
         day2_start_time: '',
@@ -197,11 +197,11 @@ export class AddEvent {
 
     add(){
       console.log(this.addEvent.value);
-      // this._service.addEvent(this.addEvent.value)
-      // .subscribe(
-      //   data => console.log(data),
-      //   error => console.log(error)
-      // );
+      this._service.addEvent(this.addEvent.value)
+      .subscribe(
+        data => console.log(data),
+        error => console.log(error)
+      );
     }
 }
 
