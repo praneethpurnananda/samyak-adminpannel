@@ -55,87 +55,11 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="example-full-width-one" appearance="outline">
-          <mat-label>Event Link</mat-label>
-          <input matInput id="link" formControlName="attending_link">
-        </mat-form-field>
 
         <mat-form-field class="example-full-width-one" appearance="outline" style="width: 80%;">
           <mat-label>Description</mat-label>
           <textarea  matInput id="description" formControlName="description"></textarea>
         </mat-form-field>
-
-        <br>
-
-        <mat-checkbox formControlName="day1_event">Day-1</mat-checkbox>
-
-        <mat-form-field class="example-full-width-one" appearance="outline">
-          <mat-label>Start Time</mat-label>
-          <input matInput type="time" id="time1" formControlName="day1_start_time">
-          <mat-hint>Time Format Shoud be 24 Hours </mat-hint>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width-one" appearance="outline">
-          <mat-label>End Time</mat-label>
-          <input matInput type="time" id="time2" formControlName="day1_end_time">
-          <mat-hint>Time Format Shoud be 24 Hours</mat-hint>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Day-1 Date</mat-label>
-          <input matInput [matDatepicker]="dp1" formControlName="day1_date" >
-          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
-          <mat-datepicker #dp1></mat-datepicker>
-        </mat-form-field>
-
-        <br>
-
-        <mat-checkbox formControlName="day2_event">Day-2</mat-checkbox>
-
-        <mat-form-field class="example-full-width-one" appearance="outline">
-          <mat-label>Start Time</mat-label>
-          <input matInput type="time" id="time3" formControlName="day2_start_time" >
-          <mat-hint>Time Format Shoud be 24 Hours </mat-hint>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width-one" appearance="outline">
-          <mat-label>End Time</mat-label>
-          <input matInput type="time" id="time4" formControlName="day2_end_time">
-          <mat-hint>Time Format Shoud be 24 Hours </mat-hint>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Day-2 Date</mat-label>
-          <input matInput [matDatepicker]="dp2" formControlName="day2_date" >
-          <mat-datepicker-toggle matSuffix [for]="dp2" ></mat-datepicker-toggle>
-          <mat-datepicker #dp2></mat-datepicker>
-        </mat-form-field>
-
-        <br>
-
-        <mat-checkbox formControlName="day3_event">Day-3</mat-checkbox>
-
-        <mat-form-field class="example-full-width-one" appearance="outline">
-          <mat-label>Start Time</mat-label>
-          <input matInput type="time" id="time5" formControlName="day3_start_time" >
-          <mat-hint>Time Format Shoud be 24 Hours </mat-hint>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width-one" appearance="outline">
-          <mat-label>End Time</mat-label>
-          <input matInput type="time" id="time6" formControlName="day3_end_time" >
-          <mat-hint>Time Format Shoud be 24 Hours </mat-hint>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Day-3 Date</mat-label>
-          <input matInput [matDatepicker]="dp3" formControlName="day3_date" >
-          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-          <mat-datepicker #dp3></mat-datepicker>
-        </mat-form-field>
-
-
-
 
       </form>
   </div>

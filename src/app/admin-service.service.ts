@@ -160,4 +160,17 @@ export class AdminServiceService {
     });
   }
 
+  addEventBatch(body: any){
+    return this._http.post(this.backendService+'/slots/add', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  getEventBatches(body: any){
+    return this._http.post(this.backendService+'/slots/all-slots', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
 }

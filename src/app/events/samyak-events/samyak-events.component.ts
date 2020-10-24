@@ -108,6 +108,18 @@ export class SamyakEventsComponent implements OnInit {
     });
   }
 
+  addBatches(element){
+    const dialogRef = this.dialog.open(AddBatch, {
+      width: '990px',
+      data: element,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.ngOnInit();
+      }
+    });
+  }
+
 
 
 }
@@ -192,23 +204,10 @@ export class AddEvent {
         organiser: ['', Validators.required],
         description: ['', Validators.required],
         multiple_events_allowed: ['', Validators.required],
-        attending_link: '',
         venue: ['', Validators.required],
         registration_price: ['', Validators.required],
         type: ['', Validators.required],
         code: ['', Validators.required],
-        day1_event: [{value: false , disabled: false}],
-        day2_event: [{value: false , disabled: false}],
-        day3_event: [{value: false , disabled: false}],
-        day1_start_time: '',
-        day1_end_time: '',
-        day1_date: '',
-        day2_start_time: '',
-        day2_end_time: '',
-        day2_date: '',
-        day3_start_time: '',
-        day3_end_time: '',
-        day3_date: ''
       });
     }
 
@@ -324,24 +323,67 @@ export class EditEvent {
           venue: [{value: data.formdata.venue , disabled: false}, Validators.required],
           multiple_events_allowed: [{value: data.formdata.multiple_events_allowed , disabled: false}, Validators.required],
           type: [{value: data.formdata.type[0]._id , disabled: false}, Validators.required],
-          attending_link: [{value: data.formdata.attending_link , disabled: false}, Validators.required],
-          day1_event: [{value: data.formdata.time.day1.event , disabled: false}],
-          day2_event: [{value: data.formdata.time.day2.event , disabled: false}],
-          day3_event: [{value: data.formdata.time.day3.event , disabled: false}],
-          day1_start_time: [{value: data.formdata.time.day1.start_time , disabled: false}],
-          day1_end_time: '',
-          day1_date: '',
-          day2_start_time: '',
-          day2_end_time: '' ,
-          day2_date: '',
-          day3_start_time: '',
-          day3_end_time: '',
-          day3_date: ''
         });
-        console.log(data.formdata.time.day1.start_time);
       }
   onNoClick(): void{
     this.dialogRef.close();
   }
 
+}
+
+//add-Batches
+@Component({
+  selector: 'add-batch',
+  templateUrl: 'add-batch.html',
+  styleUrls: ['./samyak-events.component.css']
+})
+export class AddBatch {
+
+  addBatchesForm: FormGroup;
+  allBatches;
+  constructor(
+    public dialogRef: MatDialogRef<AddBatch>,
+      @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
+        this.addBatchesForm = this.fb.group({
+          name: ['', Validators.required],
+          meet_link: ['', Validators.required],
+          event: [{value: data.code , disabled: true}, Validators.required],
+          date: ['', Validators.required],
+          start_time: ['', Validators.required],
+          end_time: ['', Validators.required]
+        });
+
+        let tmp = {eventCode : data.code};
+        console.log(tmp);
+        this._service.getEventBatches(tmp)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.allBatches = this.data['slots'];
+          },
+          error => console.log(error)
+        );
+      }
+
+      onNoClick(): void{
+        this.dialogRef.close();
+      }
+
+      add(){
+        let tmp = {
+          name: this.addBatchesForm.value.name,
+          meet_link: this.addBatchesForm.value.meet_link,
+          date: this.addBatchesForm.value.date,
+          start_time: this.addBatchesForm.value.start_time,
+          end_time: this.addBatchesForm.value.end_time,
+          event: this.addBatchesForm.getRawValue().event
+        };
+        this._service.addEventBatch(tmp)
+        .subscribe(
+          data => console.log(data),
+          error => console.log(error)
+        )
+      }
+
+      displayBatches(){}
 }
