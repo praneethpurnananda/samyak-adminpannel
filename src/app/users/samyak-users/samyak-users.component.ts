@@ -1,30 +1,43 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject ,ViewChild} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirective} from '@angular/forms';
 import {MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
 import { AdminServiceService } from "../../admin-service.service";
+import { element } from 'protractor';
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-samyak-users',
   templateUrl: './samyak-users.component.html',
   styleUrls: ['./samyak-users.component.css']
 })
-export class SamyakUsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name' ,'samyak_id', 'email', 'mobile' , 'college' , 'college_id' , 'email_verified', 'more'];
+export class SamyakUsersComponent implements OnInit {
+  @ViewChild('fform') feedbackFormDirective;
+  displayedColumns: string[] = ['select','position', 'name' ,'samyak_id', 'email', 'mobile' , 'college' , 'college_id' , 'email_verified', 'more'];
   usersData;
   dataSource;
   userRoles;
   allRolesData;
-  constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private _service: AdminServiceService) { }
-
+  filterForm:FormGroup;
+  constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private _service: AdminServiceService,private fb:FormBuilder) {
+      this.filterForm = this.fb.group({
+        email_verified:['2'],
+        gender:[''],
+        status:['2'],
+        college:[''],
+      });
+   }
   ngOnInit(): void {
     this._service.getAllUsers()
     .subscribe(
       data => {
         this.usersData = data;
         this.dataSource = this.usersData;
-        // console.log(this.usersData);
+        console.log(this.dataSource);
+
+        
       },
       error => console.log(error)
     );
@@ -47,6 +60,46 @@ export class SamyakUsersComponent implements OnInit {
       error => console.log(error)
     )
   }
+  selection = new SelectionModel<any>(true, []);
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.length;
+    console.log(numRows);
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.forEach(row => this.selection.select(row));
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+
+
+  filterUsers () {
+    this.dataSource=this.usersData;
+    let filter=this.filterForm.value;
+    console.log(filter)
+    for (var prop in filter) {
+      if(filter[prop]==="" || filter[prop]==="2"){
+        continue;
+      }
+      else{
+        this.dataSource=this.dataSource.filter(x => x[prop]==filter[prop]);
+      }
+    }
+
+}
 
 edit(element){
   const dialogRef = this.dialog.open(EditUsers, {

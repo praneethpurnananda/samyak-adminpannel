@@ -6,6 +6,40 @@
 
 </mat-toolbar> -->
 <br>
+<p>{{ filterForm.value | json }}</p>
+<form novalidate [formGroup]="filterForm" #fform="ngForm">
+  <mat-form-field >
+    <mat-label>email verified</mat-label>
+    <select matNativeControl formControlName="email_verified">
+      <option value=2>all</option>
+      <option value=1>verified</option>
+      <option value=0>not verified</option>
+    </select>
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>account status</mat-label>
+    <select matNativeControl  formControlName="status">
+      <option value=2>all</option>
+      <option value=1>Enabled</option>
+      <option value=0>disabled</option>
+    </select>
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>gender</mat-label>
+    <select matNativeControl required formControlName="gender">
+      <option value="">all</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>college</mat-label>
+    <input matInput  formControlName="college">
+  </mat-form-field>
+  <button mat-button color="primary" (click)="filterUsers()">filter</button>
+</form>
+
+
 <!--data table-->
 <div class="table">
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -14,6 +48,24 @@
         The actual rendered columns are set as a property on the row definition" -->
 
   <!-- Position Column -->
+  
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxLabel(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container> 
+
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> No. </th>
     <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{usersData.indexOf(element) + 1}} </td>
