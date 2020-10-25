@@ -354,12 +354,30 @@ export class AddBatch {
         });
 
         let tmp = {eventCode : data.code};
+        this.getBatch(tmp);
+      }
+
+      getBatch(tmp){
         console.log(tmp);
         this._service.getEventBatches(tmp)
         .subscribe(
           data => {
             console.log(data);
-            this.allBatches = this.data['slots'];
+            this.allBatches = data['slots'];
+            console.log(this.allBatches);
+          },
+          error => console.log(error)
+        );
+      }
+
+      delete(item){
+        let sltId = {slotId: item._id};
+        this._service.deleteBatch(sltId)
+        .subscribe(
+          data => {
+            console.log(data);
+            let tmp = {eventCode: this.data.code};
+            this.getBatch(tmp);
           },
           error => console.log(error)
         );
@@ -380,7 +398,16 @@ export class AddBatch {
         };
         this._service.addEventBatch(tmp)
         .subscribe(
-          data => console.log(data),
+          data => {
+            console.log(data);
+            let tmp = {eventCode: this.data.code};
+            this.getBatch(tmp);
+            this.addBatchesForm.controls['name'].reset();
+            this.addBatchesForm.controls['meet_link'].reset();
+            this.addBatchesForm.controls['date'].reset();
+            this.addBatchesForm.controls['start_time'].reset();
+            this.addBatchesForm.controls['end_time'].reset();
+          },
           error => console.log(error)
         )
       }

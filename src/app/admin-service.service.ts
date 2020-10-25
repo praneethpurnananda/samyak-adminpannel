@@ -173,4 +173,11 @@ export class AdminServiceService {
       headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
     });
   }
+
+  deleteBatch(body: any){
+    return this._http.post(this.backendService+'/slots/delete', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
 }
