@@ -21,11 +21,12 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 
 import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch} from './samyak-events/samyak-events.component';
+import { EventParticipantsComponent } from './event-participants/event-participants.component';
 
 
 
 @NgModule({
-  declarations: [SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch],
+  declarations: [SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch, EventParticipantsComponent],
   imports: [
     CommonModule,
     BrowserModule,

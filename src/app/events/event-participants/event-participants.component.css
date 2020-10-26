@@ -1,0 +1,19 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .table{
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+  
+  .test{
+    background-color: #dddddd;
+    color: #000;
+  }
+  
+  

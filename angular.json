@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "admin-website"
+  "defaultProject": "admin-website",
+  "cli": {
+    "analytics": false
+  }
 }

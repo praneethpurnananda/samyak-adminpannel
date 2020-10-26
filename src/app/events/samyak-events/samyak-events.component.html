@@ -79,6 +79,10 @@
           <mat-icon>info</mat-icon>
           <span>More Info</span>
         </button>
+        <button mat-menu-item [routerLink]="['/admin/event-participants',element.code]">
+          <mat-icon>people</mat-icon>
+          <span>Participants</span>
+        </button>
         <button mat-menu-item (click)="addBatches(element)">
           <mat-icon>add_task</mat-icon>
           <span>Add Batches</span>
