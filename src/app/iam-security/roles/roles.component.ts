@@ -184,7 +184,7 @@ export class SetPermissions {
   constructor(
     public dialogRef: MatDialogRef<SetPermissions>,
     @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
-      // console.log(this.data);
+      console.log(this.data);
     }
 
   onNoClick():void {
@@ -197,7 +197,7 @@ export class SetPermissions {
         roleId: this.data._id,
         permission: this.data.permissions[0].permissions
       };
-      // console.log(tmp);
+      console.log(tmp);
     this._service.setPermissions(tmp)
     .subscribe(
       data => console.log(data),

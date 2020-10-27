@@ -28,6 +28,30 @@ export class AuthGuard implements CanActivate {
     return false
   }
   }
+}
 
+@Injectable({
+  providedIn: 'root'
+})
+export class EventAuthGuard implements CanActivate {
+  constructor(private authService: AdminServiceService, private router: Router){}
 
+  async canActivate(){
+    if(localStorage.getItem('token')){
+     let c = {collection: 'Events', permission: 'view'};
+     const tmp = await this.authService.userPageAccess(c).toPromise();
+     console.log(tmp);
+     if(tmp){
+       return true
+     }
+     else{
+       this.router.navigate(['/']);
+       return false
+     }
+   }
+   else{
+     this.router.navigate(['/']);
+     return false
+   }
+   }
 }

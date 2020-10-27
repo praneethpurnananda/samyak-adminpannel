@@ -77,7 +77,11 @@
       <!-- Symbol Column -->
       <ng-container matColumnDef="slot">
         <th mat-header-cell *matHeaderCellDef> Slot </th>
-        <td mat-cell *matCellDef="let element" > {{element.slot_name}} </td>
+        <td mat-cell *matCellDef="let element" >
+          <div *ngFor="let item of element.slot">
+            {{item.name}} , 
+          </div>
+        </td>
       </ng-container>
 
       <!-- Symbol Column -->
@@ -92,13 +96,9 @@
               <mat-icon>info</mat-icon>
               <span>More Info</span>
             </button>
-            <!-- <button mat-menu-item  class="warn">
-              <mat-icon>published_with_changes</mat-icon>
-              <span>Change batch</span>
-            </button> -->
-            <button mat-menu-item>
-              <mat-icon>undo</mat-icon>
-              <span>Assign batch</span>
+            <button mat-menu-item (click)="deleteSlot(element)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete Batch</span>
             </button>
           </mat-menu>
         </td>

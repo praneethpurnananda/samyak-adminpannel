@@ -16,7 +16,7 @@ import { IamSecurityModule } from "./iam-security/iam-security.module";
 import { EventsModule } from "./events/events.module"
 
 //guards
-import { AuthGuard } from "./auth.guard";
+import { AuthGuard , EventAuthGuard } from "./auth.guard";
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { AuthGuard } from "./auth.guard";
     IamSecurityModule,
     EventsModule
   ],
-  providers: [AuthGuard , {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [AuthGuard , EventAuthGuard , {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

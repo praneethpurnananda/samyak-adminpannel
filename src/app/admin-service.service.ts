@@ -202,4 +202,11 @@ export class AdminServiceService {
     });
   }
 
+  deleteParticipantSlot(body: any){
+    return this._http.post(this.backendService+'/slots/remove-user', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
 }

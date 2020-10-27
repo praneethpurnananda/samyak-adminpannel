@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from "./auth.guard";
+import { AuthGuard , EventAuthGuard} from "./auth.guard";
 
 import { LoginComponent } from "./forms/login/login.component";
 import { ForgotPasswordComponent } from "./forms/forgot-password/forgot-password.component";
@@ -10,6 +10,7 @@ import { SamyakUsersComponent } from "./users/samyak-users/samyak-users.componen
 import { RolesComponent } from "./iam-security/roles/roles.component";
 import { SamyakEventsComponent } from "./events/samyak-events/samyak-events.component";
 import {EventParticipantsComponent} from "./events/event-participants/event-participants.component";
+import { ParticipantsResolverService } from "./events/event-participants/participants-resolver.service";
 
 const routes: Routes = [
   {path: '' , component: LoginComponent},
@@ -21,8 +22,8 @@ const routes: Routes = [
       {path: 'dashboard', component: DashboardComponent},
       {path: 'users', component: SamyakUsersComponent , canActivate: [AuthGuard]},
       {path: 'security', component: RolesComponent},
-      {path: 'events', component: SamyakEventsComponent},
-      {path: 'event-participants/:id', component: EventParticipantsComponent}
+      {path: 'events', component: SamyakEventsComponent , canActivate: [EventAuthGuard]},
+      {path: 'event-participants/:id', component: EventParticipantsComponent , resolve: { participants: ParticipantsResolverService}}
     ]
   }
 ];
