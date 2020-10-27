@@ -153,6 +153,13 @@ export class AdminServiceService {
     });
   }
 
+  editEvent(body: any){
+      return this._http.post(this.backendService+'/events/edit-event', body, {
+        observe: 'body',
+        headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+      });
+  }
+
   deleteEvent(body: any){
     return this._http.post(this.backendService+'/events/delete-event', body, {
       observe: 'body',
@@ -180,4 +187,19 @@ export class AdminServiceService {
       headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
     });
   }
+
+  getEventParticipantsList(id):Observable<object>{
+    return this._http.get(this.backendService+'/register/event-registrations', {
+      params: new HttpParams().append('eventId', id),
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  addParticipantsSlots(body: any){
+    return this._http.post(this.backendService+'/slots/assign-batch', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
 }

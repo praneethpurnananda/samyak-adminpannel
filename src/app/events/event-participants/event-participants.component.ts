@@ -6,65 +6,84 @@ import { AdminServiceService } from "../../admin-service.service";
 import {participant} from "./participant";
 import {SelectionModel} from '@angular/cdk/collections';
 import {ActivatedRoute} from '@angular/router';
+
+
 @Component({
   selector: 'app-event-participants',
   templateUrl: './event-participants.component.html',
   styleUrls: ['./event-participants.component.css']
 })
 export class EventParticipantsComponent implements OnInit {
-  displayedColumns: string[] = ['select','position','name' ,'samyak_id', 'email', 'mobile' ,'batch', 'more'];
+  displayedColumns: string[] = ['select', 'position', 'name' ,'samyak_id', 'email', 'mobile' , 'college_id' , 'slot' ,'more'];
   allBatches;
-  dataSource: participant[]=[
-    {
-      position:1,
-      name: "praneeth",
-      eventid:'tech001',
-      samyak_id:'SMK2K20000002',
-      email:'praneeth.m@gmail.com',
-      mobile:'9999999999' ,
-      batch :'None',
-      Assigned:1
-  },
-  {
-      position:2,
-      name: "praneeth",
-      eventid:'tech001',
-      samyak_id:'SMK2K20000002',
-      email:'praneeth.m@gmail.com',
-      mobile:'9999999999' ,
-      batch :'None',
-      Assigned:0
-  },
-  {
-      position:3,
-      name: "praneeth",
-      eventid:'tech002',
-      samyak_id:'SMK2K20000002',
-      email:'praneeth.m@gmail.com',
-      mobile:'9999999999' ,
-      batch :'None',
-      Assigned:0
-  },
-  {   
-      position:4,
-      name: "charan",
-      eventid:'tech001',
-      samyak_id:'SMK2K20000003',
-      email:'kckreddy2000@gmail.com',
-      mobile:'9999999999' ,
-      batch :'None',
-      Assigned:0
-  }
-  ];
+  dataSource;
+  participantsData;
+  registrationsData;
+  eventId;
+
+    batchesList: FormGroup;
+    constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private route:ActivatedRoute,private _service: AdminServiceService,private fb: FormBuilder) {
+      this.batchesList = this.fb.group({
+        slot: ['', Validators.required]
+      });
+    }
+
+    ngOnInit(): void {
+      let id= this.route.snapshot.params['id']
+      this.eventId = id;
+      let temp = {eventId: id}
+      this._service.getEventBatches(temp)
+      .subscribe(
+          data =>{
+            console.log(data);
+            this.allBatches=data['slots'];
+            console.log(this.allBatches);
+          },
+          error => console.log(error)
+      );
+
+      this._service.getEventParticipantsList(id)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.registrationsData = data['registrations'];
+          console.log(this.registrationsData);
+          this.participantsData = this.registrationsData[0].user;
+          console.log(this.participantsData);
+          this.dataSource = this.participantsData;
+          console.log(this.dataSource);
+        },
+        error => console.log(error)
+      );
+    }
+
+    addBatch(){
+      let tmp = {
+        eventId: this.eventId,
+        batchId: this.batchesList.value.slot,
+        users: this.selection.selected
+      };
+      this._service.addParticipantsSlots(tmp)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.ngOnInit();
+        },
+        error => console.log(error)
+      );
+      console.log(tmp);
+    }
 
   selection = new SelectionModel<participant>(true, []);
 
   /** Whether the number of selected elements matches the total number of rows. */
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.length;
     return numSelected === numRows;
   }
+
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
@@ -79,26 +98,6 @@ export class EventParticipantsComponent implements OnInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position+ 1}`;
-    
-  }
-  
-  addBatch(){
-    console.log(this.selection.selected);
-  }
-  constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private route:ActivatedRoute,private _service: AdminServiceService) { }
-
-  ngOnInit(): void {
-    let id= this.route.snapshot.params['id']
-    let temp = {eventCode: id}
-    this._service.getEventBatches(temp)
-    .subscribe(
-        data =>{
-          console.log(data);
-          this.allBatches=data['slots'];
-          console.log(this.allBatches); 
-        },
-        error => console.log(error)  
-    );
   }
 
 }

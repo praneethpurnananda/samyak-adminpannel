@@ -64,3 +64,7 @@
       </form>
   </div>
 </mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="edit()">Save Changes</button>
+</mat-dialog-actions>

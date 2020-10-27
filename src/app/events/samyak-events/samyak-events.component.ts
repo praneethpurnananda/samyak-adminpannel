@@ -329,6 +329,17 @@ export class EditEvent {
     this.dialogRef.close();
   }
 
+  edit(){
+    let tmp = {name: this.editEventsForm.value.name , eventId: this.data.formdata._id , department: this.editEventsForm.value.department , organiser: this.editEventsForm.value.organiser , description: this.editEventsForm.value.description ,
+       multiple_events_allowed: this.editEventsForm.value.multiple_events_allowed , venue: this.editEventsForm.value.venue , registration_price: this.editEventsForm.value.registration_price , type: this.editEventsForm.value.type , code: this.editEventsForm.value.code };
+    console.log(tmp);
+    this._service.editEvent(tmp)
+    .subscribe(
+      data =>  console.log(data),
+      error => console.log(error)
+    );
+  }
+
 }
 
 //add-Batches
@@ -353,7 +364,7 @@ export class AddBatch {
           end_time: ['', Validators.required]
         });
 
-        let tmp = {eventCode : data.code};
+        let tmp = {eventId : data._id};
         this.getBatch(tmp);
       }
 
@@ -376,7 +387,7 @@ export class AddBatch {
         .subscribe(
           data => {
             console.log(data);
-            let tmp = {eventCode: this.data.code};
+            let tmp = {eventId: this.data._id};
             this.getBatch(tmp);
           },
           error => console.log(error)
@@ -394,13 +405,14 @@ export class AddBatch {
           date: this.addBatchesForm.value.date,
           start_time: this.addBatchesForm.value.start_time,
           end_time: this.addBatchesForm.value.end_time,
-          event: this.addBatchesForm.getRawValue().event
+          event: this.addBatchesForm.getRawValue().event,
+          eventId: this.data._id
         };
         this._service.addEventBatch(tmp)
         .subscribe(
           data => {
             console.log(data);
-            let tmp = {eventCode: this.data.code};
+            let tmp = {eventId: this.data._id};
             this.getBatch(tmp);
             this.addBatchesForm.controls['name'].reset();
             this.addBatchesForm.controls['meet_link'].reset();
