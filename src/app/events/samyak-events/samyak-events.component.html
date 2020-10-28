@@ -1,8 +1,8 @@
 <div class="btns">
-<button mat-flat-button color="primary" class="add-btn" (click)="addEventType()">Add event type</button>
+<button mat-flat-button color="primary" class="add-btn" (click)="addEventType()" *ngIf="canAdd">Add event type</button>
 <button mat-flat-button color="primary" class="add-btn" (click)="displayEventTypes()">View event types</button>
-<button mat-flat-button color="primary" class="add-btn" (click)="addEvent()">Add new event</button>
-<button mat-flat-button color="primary" class="add-btn" (click)="addcsv()">Upload CSV</button>
+<button mat-flat-button color="primary" class="add-btn" (click)="addEvent()" *ngIf="canAdd">Add new event</button>
+<button mat-flat-button color="primary" class="add-btn" (click)="addcsv()" *ngIf="canAdd">Upload CSV</button>
 </div>
 
 <br><br>
@@ -71,7 +71,7 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="edit(element)">
+        <button mat-menu-item (click)="edit(element)" *ngIf="canEdit">
           <mat-icon>create</mat-icon>
           <span>Edit Event</span>
         </button>
@@ -79,15 +79,15 @@
           <mat-icon>info</mat-icon>
           <span>More Info</span>
         </button>
-        <button mat-menu-item [routerLink]="['/admin/event-participants',element._id]">
+        <button mat-menu-item [routerLink]="['/admin/event-participants',element._id]" *ngIf="canAccessParticipants">
           <mat-icon>people</mat-icon>
           <span>Participants</span>
         </button>
-        <button mat-menu-item (click)="addBatches(element)">
+        <button mat-menu-item (click)="addBatches(element)" *ngIf="canAccessSlots">
           <mat-icon>add_task</mat-icon>
           <span>Add Batches</span>
         </button>
-        <button mat-menu-item (click)="conformDelete(element)">
+        <button mat-menu-item (click)="conformDelete(element)" *ngIf="canDelete">
           <mat-icon>delete</mat-icon>
           <span>Delete</span>
         </button>

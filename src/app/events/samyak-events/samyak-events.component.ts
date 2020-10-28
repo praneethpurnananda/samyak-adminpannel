@@ -14,6 +14,11 @@ export class SamyakEventsComponent implements OnInit {
   allEvents;
   displayedColumns: string[] = ['position', 'name' ,'code', 'department', 'multiple_events_allowed' , 'organiser' , 'registration_price' , 'status', 'more'];
   dataSource;
+  canAdd:boolean = false;
+  canEdit:boolean = false;
+  canDelete:boolean = false;
+  canAccessSlots:boolean = false;
+  canAccessParticipants:boolean = false;
   constructor(public dialog: MatDialog,private _service: AdminServiceService) { }
 
   ngOnInit(): void {
@@ -35,6 +40,44 @@ export class SamyakEventsComponent implements OnInit {
       },
       error => console.log(error)
     );
+
+
+     let p1 = {collection: 'Events', permission: 'add'};
+     let p2 = {collection: 'Events', permission: 'edit'};
+     let p3 = {collection: 'Events', permission: 'delete'};
+     let p4 = {collection: 'Events', permission: 'manage_batches'};
+     let p5 = {collection: 'Events', permission: 'manage_participants'};
+
+     this._service.userPageAccess(p1)
+     .subscribe(
+       data => this.canAdd = Boolean(data),
+       error => console.log(error)
+     );
+
+     this._service.userPageAccess(p2)
+     .subscribe(
+       data => this.canEdit = Boolean(data),
+       error => console.log(error)
+     );
+
+     this._service.userPageAccess(p3)
+     .subscribe(
+       data => {this.canDelete = Boolean(data),console.log(this.canDelete)},
+       error => console.log(error)
+     );
+
+     this._service.userPageAccess(p4)
+     .subscribe(
+       data => this.canAccessSlots = Boolean(data),
+       error => console.log(error)
+     );
+
+     this._service.userPageAccess(p5)
+     .subscribe(
+       data => this.canAccessParticipants = Boolean(data),
+       error => console.log(error)
+     );
+
   }
 
   addEventType(){

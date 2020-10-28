@@ -20,7 +20,7 @@ const routes: Routes = [
     component: ToolbarComponent,
     children: [
       {path: 'dashboard', component: DashboardComponent},
-      {path: 'users', component: SamyakUsersComponent , canActivate: [AuthGuard]},
+      {path: 'users', component: SamyakUsersComponent },
       {path: 'security', component: RolesComponent},
       {path: 'events', component: SamyakEventsComponent , canActivate: [EventAuthGuard]},
       {path: 'event-participants/:id', component: EventParticipantsComponent , resolve: { participants: ParticipantsResolverService}}
