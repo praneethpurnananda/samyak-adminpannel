@@ -413,6 +413,7 @@ export class AddBatch {
 
       getBatch(tmp){
         console.log(tmp);
+        console.log("calling batches");
         this._service.getEventBatches(tmp)
         .subscribe(
           data => {

@@ -175,6 +175,7 @@ export class AdminServiceService {
   }
 
   getEventBatches(body: any){
+    console.log('in service');
     return this._http.post(this.backendService+'/slots/all-slots', body, {
       observe: 'body',
       headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))

@@ -23,7 +23,7 @@ const routes: Routes = [
       {path: 'users', component: SamyakUsersComponent },
       {path: 'security', component: RolesComponent},
       {path: 'events', component: SamyakEventsComponent , canActivate: [EventAuthGuard]},
-      {path: 'event-participants/:id', component: EventParticipantsComponent , resolve: { participants: ParticipantsResolverService}}
+      {path: 'event-participants/:id', component: EventParticipantsComponent} //, resolve: { participants: ParticipantsResolverService}
     ]
   }
 ];
