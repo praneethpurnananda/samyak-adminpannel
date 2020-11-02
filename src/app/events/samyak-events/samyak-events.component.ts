@@ -12,7 +12,7 @@ import { saveAs } from 'file-saver';
 export class SamyakEventsComponent implements OnInit {
   allEventTypes;
   allEvents;
-  displayedColumns: string[] = ['position', 'name' ,'code', 'department', 'multiple_events_allowed' , 'organiser' , 'registration_price' , 'status', 'more'];
+  displayedColumns: string[] = ['position', 'name' ,'code', 'department', 'multiple_events_allowed' , 'organiser'  , 'status', 'more'];
   dataSource;
   canAdd:boolean = false;
   canEdit:boolean = false;
@@ -248,9 +248,10 @@ export class AddEvent {
         description: ['', Validators.required],
         multiple_events_allowed: ['', Validators.required],
         venue: ['', Validators.required],
-        registration_price: ['', Validators.required],
         type: ['', Validators.required],
         code: ['', Validators.required],
+        faculty_organiser: '',
+        faculty_contact: ''
       });
     }
 
@@ -361,11 +362,12 @@ export class EditEvent {
           code: [{value: data.formdata.code , disabled: false}, Validators.required],
           department: [{value: data.formdata.department , disabled: false}, Validators.required],
           organiser: [{value: data.formdata.organiser , disabled: false}, Validators.required],
-          registration_price: [{value: data.formdata.registration_price , disabled: false}, Validators.required],
           description: [{value: data.formdata.description , disabled: false}, Validators.required],
           venue: [{value: data.formdata.venue , disabled: false}, Validators.required],
           multiple_events_allowed: [{value: data.formdata.multiple_events_allowed , disabled: false}, Validators.required],
           type: [{value: data.formdata.type[0]._id , disabled: false}, Validators.required],
+          faculty_organiser: [{value: data.formdata.faculty_organiser , disabled: false}],
+          faculty_contact: [{value: data.formdata.faculty_contact , disabled: false}]
         });
       }
   onNoClick(): void{
@@ -374,7 +376,8 @@ export class EditEvent {
 
   edit(){
     let tmp = {name: this.editEventsForm.value.name , eventId: this.data.formdata._id , department: this.editEventsForm.value.department , organiser: this.editEventsForm.value.organiser , description: this.editEventsForm.value.description ,
-       multiple_events_allowed: this.editEventsForm.value.multiple_events_allowed , venue: this.editEventsForm.value.venue , registration_price: this.editEventsForm.value.registration_price , type: this.editEventsForm.value.type , code: this.editEventsForm.value.code };
+       multiple_events_allowed: this.editEventsForm.value.multiple_events_allowed , venue: this.editEventsForm.value.venue  ,
+      type: this.editEventsForm.value.type , code: this.editEventsForm.value.code , faculty_organiser: this.editEventsForm.value.faculty_organiser , faculty_contact: this.editEventsForm.value.faculty_contact};
     console.log(tmp);
     this._service.editEvent(tmp)
     .subscribe(

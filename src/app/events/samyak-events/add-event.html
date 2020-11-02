@@ -21,6 +21,16 @@
         <input matInput id="organiser" formControlName="organiser">
       </mat-form-field>
 
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Faculty Incharge Name</mat-label>
+        <input matInput id="faculty_name" formControlName="faculty_organiser">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Faculty Incharge Contact Number</mat-label>
+        <input matInput id="faculty_contact" formControlName="faculty_contact">
+      </mat-form-field>
+
 
       <mat-form-field class="example-full-width-one" appearance="outline">
         <mat-label>Multiple Events Allowed</mat-label>
@@ -37,10 +47,6 @@
         <input matInput id="venue" formControlName="venue">
       </mat-form-field>
 
-      <mat-form-field class="example-full-width-one" appearance="outline">
-        <mat-label>Registration Price</mat-label>
-        <input matInput id="price" formControlName="registration_price">
-      </mat-form-field>
 
       <mat-form-field class="example-full-width-one" appearance="outline">
         <mat-label>Event Type</mat-label>
@@ -60,19 +66,6 @@
         <mat-label>Description</mat-label>
         <textarea  matInput id="description" formControlName="description"></textarea>
       </mat-form-field>
-
-
-<!--  this.addEvent.controls['day1_start_time'].disable();
-  this.addEvent.controls['day2_start_time'].disable();
-  this.addEvent.controls['day3_start_time'].disable();
-
-  this.addEvent.controls['day1_end_time'].disable();
-  this.addEvent.controls['day2_end_time'].disable();
-  this.addEvent.controls['day3_end_time'].disable();
-
-  this.addEvent.controls['day1_date'].disable();
-  this.addEvent.controls['day2_date'].disable();
-  this.addEvent.controls['day3_date'].disable();-->
 
 
     </form>
