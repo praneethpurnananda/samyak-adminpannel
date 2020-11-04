@@ -210,4 +210,10 @@ export class AdminServiceService {
     });
   }
 
+  paymentsData():Observable<object>{
+    return this._http.get(this.backendService+'/payments/all-payments', {
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
 }

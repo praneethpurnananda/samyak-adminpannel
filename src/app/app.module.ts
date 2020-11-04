@@ -13,7 +13,8 @@ import { NavbarFooterModule } from "./navbar-footer/navbar-footer.module";
 import { MainModuleModule } from "./main-module/main-module.module";
 import { UsersModule } from "./users/users.module";
 import { IamSecurityModule } from "./iam-security/iam-security.module";
-import { EventsModule } from "./events/events.module"
+import { EventsModule } from "./events/events.module";
+import { PaymentsModule } from "./payments/payments.module"
 
 //guards
 import { AuthGuard , EventAuthGuard } from "./auth.guard";
@@ -32,7 +33,8 @@ import { AuthGuard , EventAuthGuard } from "./auth.guard";
     MainModuleModule,
     UsersModule,
     IamSecurityModule,
-    EventsModule
+    EventsModule,
+    PaymentsModule
   ],
   providers: [AuthGuard , EventAuthGuard , {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

@@ -228,6 +228,7 @@ export class DisplayEventType {
 export class AddEvent {
 
   addEvent: FormGroup;
+  private imageSrc: string = '';
   departments = [
     {value: 'cse' , viewValue: 'CSE'},
     {value: 'ece' , viewValue: 'ECE'}
@@ -255,6 +256,24 @@ export class AddEvent {
       });
     }
 
+    handleInputChange(e) {
+      var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+      var pattern = /image-*/;
+      var reader = new FileReader();
+      if (!file.type.match(pattern)) {
+        alert('invalid format');
+        return;
+      }
+      reader.onload = this._handleReaderLoaded.bind(this);
+      reader.readAsDataURL(file);
+    }
+
+  _handleReaderLoaded(e) {
+    let reader = e.target;
+    this.imageSrc = reader.result;
+    console.log(this.imageSrc)
+  }
+
 
     disableOne(){};
     disableTwo(){};
@@ -266,7 +285,20 @@ export class AddEvent {
 
     add(){
       console.log(this.addEvent.value);
-      this._service.addEvent(this.addEvent.value)
+      let tmp = {
+        name: this.addEvent.value.name,
+        department: this.addEvent.value.department,
+        organiser: this.addEvent.value.organiser,
+        description: this.addEvent.value.description,
+        multiple_events_allowed: this.addEvent.value.multiple_events_allowed,
+        venue: this.addEvent.value.venue,
+        type: this.addEvent.value.type,
+        code: this.addEvent.value.code,
+        faculty_organiser: this.addEvent.value.faculty_organiser,
+        faculty_contact: this.addEvent.value.faculty_organiser,
+        image: this.imageSrc
+      };
+      this._service.addEvent(tmp)
       .subscribe(
         data => console.log(data),
         error => console.log(error)

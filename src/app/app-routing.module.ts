@@ -9,8 +9,12 @@ import { DashboardComponent } from './main-module/dashboard/dashboard.component'
 import { SamyakUsersComponent } from "./users/samyak-users/samyak-users.component";
 import { RolesComponent } from "./iam-security/roles/roles.component";
 import { SamyakEventsComponent } from "./events/samyak-events/samyak-events.component";
-import {EventParticipantsComponent} from "./events/event-participants/event-participants.component";
+import { EventParticipantsComponent } from "./events/event-participants/event-participants.component";
+import { SamyakPaymentsComponent } from "./payments/samyak-payments/samyak-payments.component";
+
+//resolvers
 import { ParticipantsResolverService } from "./events/event-participants/participants-resolver.service";
+
 
 const routes: Routes = [
   {path: '' , component: LoginComponent},
@@ -23,7 +27,8 @@ const routes: Routes = [
       {path: 'users', component: SamyakUsersComponent },
       {path: 'security', component: RolesComponent},
       {path: 'events', component: SamyakEventsComponent , canActivate: [EventAuthGuard]},
-      {path: 'event-participants/:id', component: EventParticipantsComponent} //, resolve: { participants: ParticipantsResolverService}
+      {path: 'event-participants/:id', component: EventParticipantsComponent}, //, resolve: { participants: ParticipantsResolverService}
+      {path: 'payments' , component: SamyakPaymentsComponent}
     ]
   }
 ];

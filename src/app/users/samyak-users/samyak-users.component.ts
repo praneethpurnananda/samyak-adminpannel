@@ -24,7 +24,7 @@ export class SamyakUsersComponent implements OnInit {
       data => {
         this.usersData = data;
         this.dataSource = this.usersData;
-        // console.log(this.usersData);
+        console.log(this.dataSource);
       },
       error => console.log(error)
     );
