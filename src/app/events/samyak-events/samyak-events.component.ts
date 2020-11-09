@@ -12,6 +12,7 @@ import { saveAs } from 'file-saver';
 export class SamyakEventsComponent implements OnInit {
   allEventTypes;
   allEvents;
+  alldepartments;
   displayedColumns: string[] = ['position', 'name' ,'code', 'department', 'multiple_events_allowed' , 'organiser'  , 'status', 'more'];
   dataSource;
   canAdd:boolean = false;
@@ -77,7 +78,6 @@ export class SamyakEventsComponent implements OnInit {
        data => this.canAccessParticipants = Boolean(data),
        error => console.log(error)
      );
-
   }
 
   addEventType(){
@@ -163,7 +163,29 @@ export class SamyakEventsComponent implements OnInit {
     });
   }
 
+  addDepartments(){
+    const dialogRef = this.dialog.open(AddDepartment, {
+      width: '990px',
+      data: this.allEventTypes,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.ngOnInit();
+      }
+    });
+  }
 
+  // editDepartment(element){
+  //   const dialogRef = this.dialog.open(EditDepartment, {
+  //     width: '990px',
+  //     data: element,
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if(result){
+  //       this.ngOnInit();
+  //     }
+  //   });
+  // }
 
 }
 
@@ -229,10 +251,7 @@ export class AddEvent {
 
   addEvent: FormGroup;
   private imageSrc: string = '';
-  departments = [
-    {value: 'cse' , viewValue: 'CSE'},
-    {value: 'ece' , viewValue: 'ECE'}
-  ];
+  departments ;
   multiple_events_allowed = [
     {viewValue: 'Allowed' , value: 1},
     {viewValue: 'Not Allowed' , value: 0}
@@ -241,6 +260,11 @@ export class AddEvent {
   constructor(
     public dialogRef: MatDialogRef<AddEvent>,
     @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
+      this._service.getDepartments()
+      .subscribe(
+         data => this.departments = data,
+         error=> console.log(error)    
+      );
 
       this.addEvent = this.fb.group({
         name: ['', Validators.required],
@@ -374,10 +398,7 @@ export class DeleteEvent {
 export class EditEvent {
 
   editEventsForm: FormGroup;
-  departments = [
-    {value: 'cse' , viewValue: 'CSE'},
-    {value: 'ece' , viewValue: 'ECE'}
-  ];
+  departments ;
   multiple_events_allowed = [
     {viewValue: 'Allowed' , value: 1},
     {viewValue: 'Not Allowed' , value: 0}
@@ -388,7 +409,12 @@ export class EditEvent {
     public dialogRef: MatDialogRef<EditEvent>,
       @Inject(MAT_DIALOG_DATA) public data,private fb: FormBuilder, private _service: AdminServiceService){
         console.log(this.data);
-
+        this._service.getDepartments()
+        .subscribe(
+           data => this.departments = data,
+           error=> console.log(error)    
+        );
+        console.log(this.departments);
         this.editEventsForm = this.fb.group({
           name: [{value: data.formdata.name , disabled: false}, Validators.required],
           code: [{value: data.formdata.code , disabled: false}, Validators.required],
@@ -505,3 +531,113 @@ export class AddBatch {
 
       displayBatches(){}
 }
+
+
+//add-Departments
+@Component({
+  selector: 'add-department',
+  templateUrl: 'add-department.html',
+  styleUrls: ['./samyak-events.component.css']
+})
+export class AddDepartment {
+
+  addDepartmentsForm: FormGroup;
+  allDepartments;
+  constructor(
+    public dialogRef: MatDialogRef<AddDepartment>,
+      @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
+        this.addDepartmentsForm = this.fb.group({
+          name: ['', Validators.required],
+        });
+        this.getDepartment();
+      }
+
+      getDepartment(){
+        console.log();
+        console.log("calling Departments");
+        this._service.getDepartments()
+        .subscribe(
+          data => {
+            console.log(data);
+            this.allDepartments = data;
+            console.log(this.allDepartments);
+          },
+          error => console.log(error)
+        );
+      }
+
+      delete(item){
+        let demartmentId = {departmentId: item._id};
+        this._service.deleteDepartment(demartmentId)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.getDepartment();
+          },
+          error => console.log(error)
+        );
+      }
+      edit(item){
+        let demartment = {departmentId: item._id,name:this.addDepartmentsForm.value.name};
+        this._service.editDepartment(demartment)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.getDepartment();
+          },
+          error => console.log(error)
+        );
+      }
+
+      onNoClick(): void{
+        this.dialogRef.close();
+      }
+
+      add(){
+        let tmp = {
+          name: this.addDepartmentsForm.value.name,
+        };
+        this._service.addDepartment(tmp)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.getDepartment();
+            this.addDepartmentsForm.controls['name'].reset();
+          },
+          error => console.log(error)
+        )
+      }
+
+      displayDepartments(){}
+}
+
+// @Component({
+//   selector: 'edit-department',
+//   templateUrl: 'edit-department.html',
+//   styleUrls: ['./samyak-events.component.css']
+// })
+// export class EditDepartment {
+
+//   editDepartmentsForm: FormGroup;
+//   constructor(
+//     public dialogRef: MatDialogRef<AddDepartment>,
+//       @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
+//         this.editDepartmentsForm = this.fb.group({
+//           name: ['', Validators.required],
+//         });
+//       }
+//       edit(){
+//         let demartment = {departmentId: this.data._id,name:this.editDepartmentsForm.value.name};
+//         this._service.editDepartment(demartment)
+//         .subscribe(
+//           data => {
+//             console.log(data);
+//           },
+//           error => console.log(error)
+//         );
+//       }
+
+//       onNoClick(): void{
+//         this.dialogRef.close();
+//       }
+// }

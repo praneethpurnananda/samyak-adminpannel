@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Batches Info</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="display">
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel *ngFor="let item of allDepartments">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+             {{item.name}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <button mat-raised-button cdkFocusInitial color="warn" (click)='delete(item)'>Delete</button>
+        <!-- <button mat-raised-button cdkFocusInitial  (click)='edit(item)'>Edit</button> -->
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br>
+  <div class="event-form">
+    <form class="example-form" [formGroup]="addDepartmentsForm" novalidate>
+      <mat-form-field class="example-full" appearance="outline">
+        <mat-label>Department Name</mat-label>
+        <input matInput type="text" formControlName="name" id="slotname">
+      </mat-form-field>
+
+      <br><br>
+      <button mat-raised-button cdkFocusInitial color="primary"(click)='add()' style="margin-left: 2%;" >Add Department</button>
+    </form>
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions >
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

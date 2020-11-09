@@ -1,0 +1,14 @@
+<mat-dialog-content class="mat-typography">
+    <div class="event-form">
+        <form class="example-form" [formGroup]="editDepartmentsForm" novalidate>
+          <mat-form-field class="example-full" appearance="outline">
+            <mat-label>Department Name</mat-label>
+            <input matInput type="text" formControlName="name" >
+          </mat-form-field>
+    
+          <br><br>
+          <button mat-raised-button cdkFocusInitial color="primary"(click)='editDepartment(item)' style="margin-left: 2%;" >Add Department</button>
+        </form>
+    
+      </div>
+</mat-dialog-content>

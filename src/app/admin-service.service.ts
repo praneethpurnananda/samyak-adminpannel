@@ -216,4 +216,34 @@ export class AdminServiceService {
     });
   }
 
+  addDepartment(body: any){
+    return this._http.post(this.backendService+'/events/add-department', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  getDepartments():Observable<object>{
+    console.log('in service');
+    return this._http.get(this.backendService+'/events/all-departments' ,{
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  deleteDepartment(body: any){
+    return this._http.post(this.backendService+'/events/delete-department', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  editDepartment(body: any){
+    return this._http.post(this.backendService+'/events/edit-department', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+
 }
+

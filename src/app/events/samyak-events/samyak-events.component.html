@@ -1,4 +1,5 @@
 <div class="btns">
+<button mat-flat-button color="primary" class="add-btn"  (click)="addDepartments()"*ngIf="canAdd">Departments</button>
 <button mat-flat-button color="primary" class="add-btn" (click)="addEventType()" *ngIf="canAdd">Add event type</button>
 <button mat-flat-button color="primary" class="add-btn" (click)="displayEventTypes()">View event types</button>
 <button mat-flat-button color="primary" class="add-btn" (click)="addEvent()" *ngIf="canAdd">Add new event</button>
