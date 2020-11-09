@@ -19,6 +19,7 @@ export class SamyakEventsComponent implements OnInit {
   canDelete:boolean = false;
   canAccessSlots:boolean = false;
   canAccessParticipants:boolean = false;
+  alldepartments;
   constructor(public dialog: MatDialog,private _service: AdminServiceService) { }
 
   ngOnInit(): void {
@@ -116,7 +117,7 @@ export class SamyakEventsComponent implements OnInit {
   addcsv(){
       const dialogRef = this.dialog.open(AddCsvFile, {
         width: '550px',
-        data: {title: 'Upload File'},
+        data: {title: 'event'},
       });
       dialogRef.afterClosed().subscribe(result => {
         if(result){
@@ -163,6 +164,18 @@ export class SamyakEventsComponent implements OnInit {
     });
   }
 
+
+  addDepartments(){
+  const dialogRef = this.dialog.open(AddDepartment, {
+    width: '990px',
+    data: this.allEventTypes,
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result){
+      this.ngOnInit();
+    }
+  });
+}
 
 
 }
@@ -229,10 +242,7 @@ export class AddEvent {
 
   addEvent: FormGroup;
   private imageSrc: string = '';
-  departments = [
-    {value: 'cse' , viewValue: 'CSE'},
-    {value: 'ece' , viewValue: 'ECE'}
-  ];
+  departments;
   multiple_events_allowed = [
     {viewValue: 'Allowed' , value: 1},
     {viewValue: 'Not Allowed' , value: 0}
@@ -241,6 +251,12 @@ export class AddEvent {
   constructor(
     public dialogRef: MatDialogRef<AddEvent>,
     @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
+
+      this._service.getDepartments()
+      .subscribe(
+        data => this.departments = data,
+        error=> console.log(error)
+      );
 
       this.addEvent = this.fb.group({
         name: ['', Validators.required],
@@ -316,7 +332,9 @@ export class AddCsvFile {
     selectedFile = null;
   constructor(
     public dialogRef: MatDialogRef<AddCsvFile>,
-      @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){}
+      @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
+
+      }
 
       onNoClick(): void{
         this.dialogRef.close();
@@ -324,13 +342,26 @@ export class AddCsvFile {
 
       addcsv(){
         let formData:FormData = new FormData();
-        console.log("added");
+
         formData.append('newfile', this.selectedFile);
-        this._service.uploadEventCsv(formData)
-        .subscribe(
-          data => console.log(data),
-          error => console.log(error)
-        );
+        console.log(this.data.title);
+        if(this.data.title == "event"){
+          console.log('inside event');
+          this._service.uploadEventCsv(formData)
+          .subscribe(
+            data => console.log(data),
+            error => console.log(error)
+          );
+        }
+        else if(this.data.title == "techtalk"){
+          console.log('inside csv');
+          this._service.uploadTechTalkCsv(formData)
+          .subscribe(
+            data => console.log(data),
+            error => console.log(error)
+          );
+        }
+
       }
 
       onFileInput(event){
@@ -374,10 +405,7 @@ export class DeleteEvent {
 export class EditEvent {
 
   editEventsForm: FormGroup;
-  departments = [
-    {value: 'cse' , viewValue: 'CSE'},
-    {value: 'ece' , viewValue: 'ECE'}
-  ];
+  departments;
   multiple_events_allowed = [
     {viewValue: 'Allowed' , value: 1},
     {viewValue: 'Not Allowed' , value: 0}
@@ -388,6 +416,12 @@ export class EditEvent {
     public dialogRef: MatDialogRef<EditEvent>,
       @Inject(MAT_DIALOG_DATA) public data,private fb: FormBuilder, private _service: AdminServiceService){
         console.log(this.data);
+
+        this._service.getDepartments()
+        .subscribe(
+          data => this.departments = data,
+          error=> console.log(error)
+        );
 
         this.editEventsForm = this.fb.group({
           name: [{value: data.formdata.name , disabled: false}, Validators.required],
@@ -504,4 +538,84 @@ export class AddBatch {
       }
 
       displayBatches(){}
+}
+
+
+
+//add-Departments
+@Component({
+  selector: 'add-department',
+  templateUrl: 'add-department.html',
+  styleUrls: ['./samyak-events.component.css']
+})
+export class AddDepartment {
+
+  addDepartmentsForm: FormGroup;
+  allDepartments;
+  constructor(
+    public dialogRef: MatDialogRef<AddDepartment>,
+      @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
+        this.addDepartmentsForm = this.fb.group({
+          name: ['', Validators.required],
+        });
+        this.getDepartment();
+      }
+
+      getDepartment(){
+        console.log();
+        console.log("calling Departments");
+        this._service.getDepartments()
+        .subscribe(
+          data => {
+            console.log(data);
+            this.allDepartments = data;
+            console.log(this.allDepartments);
+          },
+          error => console.log(error)
+        );
+      }
+
+      delete(item){
+        let demartmentId = {departmentId: item._id};
+        this._service.deleteDepartment(demartmentId)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.getDepartment();
+          },
+          error => console.log(error)
+        );
+      }
+      edit(item){
+        let demartment = {departmentId: item._id,name:this.addDepartmentsForm.value.name};
+        this._service.editDepartment(demartment)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.getDepartment();
+          },
+          error => console.log(error)
+        );
+      }
+
+      onNoClick(): void{
+        this.dialogRef.close();
+      }
+
+      add(){
+        let tmp = {
+          name: this.addDepartmentsForm.value.name,
+        };
+        this._service.addDepartment(tmp)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.getDepartment();
+            this.addDepartmentsForm.controls['name'].reset();
+          },
+          error => console.log(error)
+        )
+      }
+
+      displayDepartments(){}
 }

@@ -11,6 +11,7 @@ import { RolesComponent } from "./iam-security/roles/roles.component";
 import { SamyakEventsComponent } from "./events/samyak-events/samyak-events.component";
 import { EventParticipantsComponent } from "./events/event-participants/event-participants.component";
 import { SamyakPaymentsComponent } from "./payments/samyak-payments/samyak-payments.component";
+import { TechTalksComponent } from "./events/tech-talks/tech-talks.component"
 
 //resolvers
 import { ParticipantsResolverService } from "./events/event-participants/participants-resolver.service";
@@ -28,7 +29,8 @@ const routes: Routes = [
       {path: 'security', component: RolesComponent},
       {path: 'events', component: SamyakEventsComponent , canActivate: [EventAuthGuard]},
       {path: 'event-participants/:id', component: EventParticipantsComponent}, //, resolve: { participants: ParticipantsResolverService}
-      {path: 'payments' , component: SamyakPaymentsComponent}
+      {path: 'payments' , component: SamyakPaymentsComponent},
+      {path: 'tech-talks' , component: TechTalksComponent}
     ]
   }
 ];

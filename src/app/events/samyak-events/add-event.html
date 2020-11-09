@@ -10,8 +10,8 @@
       <mat-form-field class="example-full-width-one" appearance="outline">
         <mat-label>Department</mat-label>
         <mat-select formControlName="department">
-          <mat-option *ngFor="let item of departments" [value]="item.value">
-            {{item.viewValue}}
+          <mat-option *ngFor="let item of departments" [value]="item.name">
+            {{item.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>

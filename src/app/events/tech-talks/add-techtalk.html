@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>Add New Event</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="event-form">
+    <form class="example-form" [formGroup]="add" novalidate>
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput id="event-name" formControlName="title">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Speaker Name</mat-label>
+        <input matInput id="speaker" formControlName="speaker">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Speaker Designation</mat-label>
+        <input matInput id="speaker_designation" formControlName="speaker_designation">
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Time</mat-label>
+        <input matInput  id="time" formControlName="time">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Organiser Samyak Id</mat-label>
+        <input matInput  id="organiser" formControlName="organiser">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Event Code</mat-label>
+        <input matInput id="code" formControlName="code">
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width-one" appearance="outline" style="width: 80%;">
+        <mat-label>Description</mat-label>
+        <textarea  matInput id="description" formControlName="description"></textarea>
+      </mat-form-field>
+
+      <br>
+
+      <input name="imageUrl" type="file" accept="image/*" (change)="handleInputChange($event)" />
+
+
+
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="addForm()">Add Event</button>
+</mat-dialog-actions>

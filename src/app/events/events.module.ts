@@ -20,13 +20,14 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 
-import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch} from './samyak-events/samyak-events.component';
+import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch,AddDepartment} from './samyak-events/samyak-events.component';
 import { EventParticipantsComponent , DeleteSlot} from './event-participants/event-participants.component';
+import { TechTalksComponent , AddTechTalk } from './tech-talks/tech-talks.component';
 
 
 
 @NgModule({
-  declarations: [SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch, EventParticipantsComponent, DeleteSlot],
+  declarations: [SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch, EventParticipantsComponent, DeleteSlot, TechTalksComponent , AddTechTalk , AddDepartment],
   imports: [
     CommonModule,
     BrowserModule,
@@ -48,6 +49,6 @@ import { EventParticipantsComponent , DeleteSlot} from './event-participants/eve
     MatMenuModule,
     MatExpansionModule
   ],
-  providers: [AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch,DeleteSlot],
+  providers: [AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch,DeleteSlot,AddTechTalk,AddDepartment],
 })
 export class EventsModule { }

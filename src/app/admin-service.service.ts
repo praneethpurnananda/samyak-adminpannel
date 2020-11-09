@@ -216,4 +216,54 @@ export class AdminServiceService {
     });
   }
 
+  addTechTalk(body: any){
+    return this._http.post(this.backendService+'/techtalks/add-talk', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  uploadTechTalkCsv(body: any){
+    console.log(body);
+    return this._http.post(this.backendService+'/techtalks/add-csvTalks', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  displayTechTalks():Observable<object>{
+    return this._http.get(this.backendService+'/techtalks/all-talks', {
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  addDepartment(body: any){
+    return this._http.post(this.backendService+'/events/add-department', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  getDepartments():Observable<object>{
+    console.log('in service');
+    return this._http.get(this.backendService+'/events/all-departments' ,{
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  deleteDepartment(body: any){
+    return this._http.post(this.backendService+'/events/delete-department', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  editDepartment(body: any){
+    return this._http.post(this.backendService+'/events/edit-department', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+
 }
