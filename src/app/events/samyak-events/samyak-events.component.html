@@ -40,10 +40,7 @@
 
 <!--book mark-->
   <!-- Symbol Column -->
-  <ng-container matColumnDef="multiple_events_allowed">
-    <th mat-header-cell *matHeaderCellDef> Multiple Events Allo </th>
-    <td mat-cell *matCellDef="let element"> {{element.multiple_events_allowed}} </td>
-  </ng-container>
+
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="organiser">
@@ -81,7 +78,7 @@
         </button>
         <button mat-menu-item (click)="addBatches(element)" *ngIf="canAccessSlots">
           <mat-icon>add_task</mat-icon>
-          <span>Add Batches</span>
+          <span>Add Slots</span>
         </button>
         <button mat-menu-item (click)="conformDelete(element)" *ngIf="canDelete">
           <mat-icon>delete</mat-icon>

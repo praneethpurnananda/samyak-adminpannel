@@ -12,7 +12,7 @@ import { saveAs } from 'file-saver';
 export class SamyakEventsComponent implements OnInit {
   allEventTypes;
   allEvents;
-  displayedColumns: string[] = ['position', 'name' ,'code', 'department', 'multiple_events_allowed' , 'organiser'  , 'status', 'more'];
+  displayedColumns: string[] = ['position', 'name' ,'code', 'department',  'organiser'  , 'status', 'more'];
   dataSource;
   canAdd:boolean = false;
   canEdit:boolean = false;
@@ -243,10 +243,6 @@ export class AddEvent {
   addEvent: FormGroup;
   private imageSrc: string = '';
   departments;
-  multiple_events_allowed = [
-    {viewValue: 'Allowed' , value: 1},
-    {viewValue: 'Not Allowed' , value: 0}
-  ];
 
   constructor(
     public dialogRef: MatDialogRef<AddEvent>,
@@ -263,7 +259,6 @@ export class AddEvent {
         department: ['', Validators.required],
         organiser: ['', Validators.required],
         description: ['', Validators.required],
-        multiple_events_allowed: ['', Validators.required],
         venue: ['', Validators.required],
         type: ['', Validators.required],
         code: ['', Validators.required],
@@ -306,7 +301,6 @@ export class AddEvent {
         department: this.addEvent.value.department,
         organiser: this.addEvent.value.organiser,
         description: this.addEvent.value.description,
-        multiple_events_allowed: this.addEvent.value.multiple_events_allowed,
         venue: this.addEvent.value.venue,
         type: this.addEvent.value.type,
         code: this.addEvent.value.code,
@@ -406,10 +400,6 @@ export class EditEvent {
 
   editEventsForm: FormGroup;
   departments;
-  multiple_events_allowed = [
-    {viewValue: 'Allowed' , value: 1},
-    {viewValue: 'Not Allowed' , value: 0}
-  ];
 
 
   constructor(
@@ -430,7 +420,6 @@ export class EditEvent {
           organiser: [{value: data.formdata.organiser , disabled: false}, Validators.required],
           description: [{value: data.formdata.description , disabled: false}, Validators.required],
           venue: [{value: data.formdata.venue , disabled: false}, Validators.required],
-          multiple_events_allowed: [{value: data.formdata.multiple_events_allowed , disabled: false}, Validators.required],
           type: [{value: data.formdata.type[0]._id , disabled: false}, Validators.required],
           faculty_organiser: [{value: data.formdata.faculty_organiser , disabled: false}],
           faculty_contact: [{value: data.formdata.faculty_contact , disabled: false}]
@@ -442,7 +431,7 @@ export class EditEvent {
 
   edit(){
     let tmp = {name: this.editEventsForm.value.name , eventId: this.data.formdata._id , department: this.editEventsForm.value.department , organiser: this.editEventsForm.value.organiser , description: this.editEventsForm.value.description ,
-       multiple_events_allowed: this.editEventsForm.value.multiple_events_allowed , venue: this.editEventsForm.value.venue  ,
+       venue: this.editEventsForm.value.venue  ,
       type: this.editEventsForm.value.type , code: this.editEventsForm.value.code , faculty_organiser: this.editEventsForm.value.faculty_organiser , faculty_contact: this.editEventsForm.value.faculty_contact};
     console.log(tmp);
     this._service.editEvent(tmp)
@@ -464,6 +453,10 @@ export class AddBatch {
 
   addBatchesForm: FormGroup;
   allBatches;
+  multiple_events_allowed = [
+    {viewValue: 'Allowed' , value: 1},
+    {viewValue: 'Not Allowed' , value: 0}
+  ];
   constructor(
     public dialogRef: MatDialogRef<AddBatch>,
       @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
@@ -471,6 +464,7 @@ export class AddBatch {
           name: ['', Validators.required],
           meet_link: ['', Validators.required],
           event: [{value: data.code , disabled: true}, Validators.required],
+          multiple_events_allowed: ['', Validators.required],
           date: ['', Validators.required],
           start_time: ['', Validators.required],
           end_time: ['', Validators.required]
@@ -519,7 +513,8 @@ export class AddBatch {
           start_time: this.addBatchesForm.value.start_time,
           end_time: this.addBatchesForm.value.end_time,
           event: this.addBatchesForm.getRawValue().event,
-          eventId: this.data._id
+          eventId: this.data._id,
+          multiple_events_allowed: this.addBatchesForm.value.multiple_events_allowed
         };
         this._service.addEventBatch(tmp)
         .subscribe(
@@ -532,6 +527,7 @@ export class AddBatch {
             this.addBatchesForm.controls['date'].reset();
             this.addBatchesForm.controls['start_time'].reset();
             this.addBatchesForm.controls['end_time'].reset();
+            this.addBatchesForm.controls['multiple_events_allowed'].reset();
           },
           error => console.log(error)
         )
