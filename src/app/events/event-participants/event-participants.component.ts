@@ -53,9 +53,9 @@ export class EventParticipantsComponent implements OnInit {
         data => {
           console.log(data);
           this.registrationsData = data['registrations'];
-          console.log(this.registrationsData);
-          this.participantsData = this.registrationsData[0].user;
-          console.log(this.participantsData);
+          // console.log(this.registrationsData);
+          this.participantsData = this.registrationsData;
+          // console.log(this.participantsData);
           this.dataSource = this.participantsData;
           console.log(this.dataSource);
         },

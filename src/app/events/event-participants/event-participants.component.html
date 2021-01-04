@@ -46,32 +46,32 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element" > {{element.name}} </td>
+        <td mat-cell *matCellDef="let element" > {{element.user[0].name}} </td>
       </ng-container>
 
       <!-- Weight Column -->
       <ng-container matColumnDef="samyak_id">
         <th mat-header-cell *matHeaderCellDef> Samyak id </th>
-        <td mat-cell *matCellDef="let element" > {{element.samyak_id}} </td>
+        <td mat-cell *matCellDef="let element" > {{element.user[0].samyak_id}} </td>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element" > {{element.email}} </td>
+        <td mat-cell *matCellDef="let element" > {{element.user[0].email}} </td>
       </ng-container>
 
     <!--book mark-->
       <!-- Symbol Column -->
       <ng-container matColumnDef="mobile">
         <th mat-header-cell *matHeaderCellDef> Mobile Number </th>
-        <td mat-cell *matCellDef="let element" > {{element.mobile}} </td>
+        <td mat-cell *matCellDef="let element" > {{element.user[0].mobile}} </td>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="college_id">
         <th mat-header-cell *matHeaderCellDef> College Id </th>
-        <td mat-cell *matCellDef="let element" > {{element.college_id}} </td>
+        <td mat-cell *matCellDef="let element" > {{element.user[0].college_id}} </td>
       </ng-container>
 
       <!-- Symbol Column -->
