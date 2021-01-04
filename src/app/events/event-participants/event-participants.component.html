@@ -78,7 +78,7 @@
       <ng-container matColumnDef="slot">
         <th mat-header-cell *matHeaderCellDef> Slot </th>
         <td mat-cell *matCellDef="let element" >
-          <div *ngFor="let item of element.slot">
+          <div *ngFor="let item of element.user[0].slot">
             {{item.name}} , 
           </div>
         </td>
