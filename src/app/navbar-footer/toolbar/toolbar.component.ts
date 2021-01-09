@@ -23,6 +23,10 @@ export class ToolbarComponent implements OnInit {
 
   }
 
+  logout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/']);
+  }
 
 
 }
