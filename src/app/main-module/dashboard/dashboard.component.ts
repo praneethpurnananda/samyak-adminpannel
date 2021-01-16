@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from "chart.js";
+import { AdminServiceService } from "../../admin-service.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +10,30 @@ import { Chart } from "chart.js";
 export class DashboardComponent implements OnInit {
 
   chart = [];
-  constructor() {
+  userDetails;
+  paymentDetails;
+  constructor(private _service: AdminServiceService) {
 
   }
 
   ngOnInit(): void {
+    this._service.getDashboardUserDetails()
+    .subscribe(
+      data => {
+        this.userDetails = data;
+        console.log(data)
+      },
+      error => console.log(error.error.message)
+    );
+
+    this._service.getDashboardPaymentDetails()
+    .subscribe(
+      data => {
+        this.paymentDetails = data;
+        console.log(data)
+      },
+      error => console.log(error.error.message)
+    );
     // this.chart = new Chart('canvas', {
     //   type: 'line',
     //   data: {

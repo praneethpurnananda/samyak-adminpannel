@@ -7,7 +7,7 @@
         </div>
         <div class="details">
           <div class="number">
-            <span>31</span>
+            <span *ngIf="userDetails">{{userDetails.count}}</span>
           </div>
           <div class="desc">Accounts Registered</div>
         </div>
@@ -20,9 +20,9 @@
         </div>
         <div class="details">
           <div class="number">
-            <span>50</span>
+            <span *ngIf="userDetails">{{userDetails.klv_count}}</span>
           </div>
-          <div class="desc">Users Payed</div>
+          <div class="desc">KL Vijayawada Accounts</div>
         </div>
       </a>
     </div>
@@ -33,9 +33,9 @@
         </div>
         <div class="details">
           <div class="number">
-            <span>20</span>
+            <span *ngIf="userDetails">{{userDetails.klh_count}}</span>
           </div>
-          <div class="desc">Users registered into events</div>
+          <div class="desc">KL Hyderabad Accounts</div>
         </div>
       </a>
     </div>
@@ -46,9 +46,83 @@
         </div>
         <div class="details">
           <div class="number">
-            <span>0</span>
+            <span *ngIf="userDetails">{{userDetails.others_count}}</span>
           </div>
-          <div class="desc">Failed transactions</div>
+          <div class="desc">Other College Accounts</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<!--payments section-->
+
+<div class="wrapper container">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <a class="dashboard-stat purple">
+        <div class="visual">
+          <i class="fa fa-calendar-o"></i>
+        </div>
+        <div class="details">
+          <div class="number">
+            <span *ngIf="paymentDetails">{{paymentDetails.klv_collected}}</span>
+          </div>
+          <div class="desc">KL Vijayawada Amount</div>
+        </div>
+      </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <a class="dashboard-stat blue">
+        <div class="visual">
+          <i class="fa fa-bar-chart-o"></i>
+        </div>
+        <div class="details">
+          <div class="number">
+            <span *ngIf="paymentDetails">{{paymentDetails.klh_collected}}</span>
+          </div>
+          <div class="desc">KL Hyderabad Amount</div>
+        </div>
+      </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <a class="dashboard-stat hoki">
+        <div class="visual">
+          <i class="fa fa-credit-card"></i>
+        </div>
+        <div class="details">
+          <div class="number">
+            <span *ngIf="paymentDetails">{{paymentDetails.other_collected}}</span>
+          </div>
+          <div class="desc">Other College's Amount</div>
+        </div>
+      </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <a class="dashboard-stat red">
+        <div class="visual">
+          <i class="fa fa-comments"></i>
+        </div>
+        <div class="details">
+          <div class="number">
+            <span *ngIf="paymentDetails">{{paymentDetails.total_collected}}</span>
+          </div>
+          <div class="desc">Total Amount</div>
+        </div>
+      </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <a class="dashboard-stat red">
+        <div class="visual">
+          <i class="fa fa-comments"></i>
+        </div>
+        <div class="details">
+          <div class="number">
+            <span *ngIf="paymentDetails">{{paymentDetails.total_number}}</span>
+          </div>
+          <div class="desc">Total Number of Payments</div>
         </div>
       </a>
     </div>

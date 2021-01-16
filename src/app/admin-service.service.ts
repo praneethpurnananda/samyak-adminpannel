@@ -266,4 +266,20 @@ export class AdminServiceService {
   }
 
 
+  //getdashboard-data
+
+  getDashboardUserDetails():Observable<object>{
+    return this._http.get(this.backendService+'/administration/users-details' ,{
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+  getDashboardPaymentDetails():Observable<object>{
+    return this._http.get(this.backendService+'/administration/payment-details' ,{
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
+
+
 }
