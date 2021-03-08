@@ -108,7 +108,7 @@ export class AddRole {
     let tmp = {role: this.addRoleForm.value.name};
     this._service.addRole(tmp)
     .subscribe(
-      data =>  console.log(data),
+      data =>  console.log('loaded'),
       error => console.log(error)
     )
   }
@@ -134,7 +134,7 @@ export class DeleteRole {
     let tmp = {RoleId: this.data.RoleId};
     this._service.deleteRole(tmp)
     .subscribe(
-      data => console.log(data),
+      data => console.log('loaded'),
       error => console.log(error)
     )
   }
@@ -163,10 +163,10 @@ export class EditRole {
 
     edit(){
       let tmp = {current_roleId: this.data.RoleId , new_role: this.editRolesForm.value.name};
-      console.log(tmp);
+      //console.log(tmp);
       this._service.editRole(tmp)
       .subscribe(
-        data => console.log(data),
+        data => console.log('data'),
         error => console.log(error)
       )
     }
@@ -184,7 +184,7 @@ export class SetPermissions {
   constructor(
     public dialogRef: MatDialogRef<SetPermissions>,
     @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
-      console.log(this.data);
+      //console.log(this.data);
     }
 
   onNoClick():void {
@@ -197,7 +197,7 @@ export class SetPermissions {
         roleId: this.data._id,
         permission: this.data.permissions[0].permissions
       };
-      console.log(tmp);
+      //console.log(tmp);
     this._service.setPermissions(tmp)
     .subscribe(
       data => console.log(data),

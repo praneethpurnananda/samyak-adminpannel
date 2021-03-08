@@ -40,9 +40,9 @@ export class EventParticipantsComponent implements OnInit {
       this._service.getEventBatches(temp)
       .subscribe(
           data =>{
-            console.log(data);
+            //console.log(data);
             this.allBatches=data['slots'];
-            console.log(this.allBatches);
+            //console.log(this.allBatches);
           },
           error => console.log(error)
       );
@@ -51,13 +51,13 @@ export class EventParticipantsComponent implements OnInit {
       this._service.getEventParticipantsList(id)
       .subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           this.registrationsData = data['registrations'];
           // console.log(this.registrationsData);
           this.participantsData = this.registrationsData;
           // console.log(this.participantsData);
           this.dataSource = this.participantsData;
-          console.log(this.dataSource);
+          //console.log(this.dataSource);
         },
         error => console.log(error)
       );
@@ -72,12 +72,12 @@ export class EventParticipantsComponent implements OnInit {
       this._service.addParticipantsSlots(tmp)
       .subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           this.ngOnInit();
         },
         error => console.log(error)
       );
-      console.log(tmp);
+      //console.log(tmp);
     }
 
   selection = new SelectionModel<participant>(true, []);
@@ -113,7 +113,7 @@ export class EventParticipantsComponent implements OnInit {
       data: {user: element, eventId: this.eventId}
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("dialog was closed");
+      //console.log("dialog was closed");
       if(result){
         this.ngOnInit();
       }
@@ -135,7 +135,7 @@ export class DeleteSlot {
     public dialogRef: MatDialogRef<DeleteSlot>,
     @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
 
-      console.log(data);
+      //console.log(data);
       this.slotForm = this.fb.group({
         slot: ['', Validators.required]
       });
@@ -145,7 +145,9 @@ export class DeleteSlot {
       let tmp  = {eventId: this.data.eventId , batchId: this.slotForm.value.slot , userId: this.data.user._id};
       this._service.deleteParticipantSlot(tmp)
       .subscribe(
-        data => console.log(data),
+        data => {
+          console.log('loaded')
+        },
         error => console.log(error)
       )
     }

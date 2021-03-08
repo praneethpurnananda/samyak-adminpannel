@@ -20,7 +20,7 @@ export class TechTalksComponent implements OnInit {
     this._service.displayTechTalks()
     .subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.techtalks = data;
         this.dataSource = this.techtalks;
       },
@@ -98,7 +98,7 @@ export class AddTechTalk {
   }
 
   addForm(){
-    console.log(this.add.value);
+    //console.log(this.add.value);
     let tmp = {
       title: this.add.value.title,
       speaker: this.add.value.speaker,
@@ -111,7 +111,7 @@ export class AddTechTalk {
     };
     this._service.addTechTalk(tmp)
     .subscribe(
-      data => console.log(data),
+      data => console.log('loaded'),
       error => console.log(error)
     );
   }

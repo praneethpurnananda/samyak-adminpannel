@@ -17,10 +17,10 @@ export class SamyakPaymentsComponent implements OnInit {
     this._service.paymentsData()
     .subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.paymentsData = data['payments'];
         this.dataSource = this.paymentsData;
-        console.log(this.dataSource);
+        //console.log(this.dataSource);
       },
       error => console.log(error)
     );

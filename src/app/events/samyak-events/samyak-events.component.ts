@@ -26,7 +26,7 @@ export class SamyakEventsComponent implements OnInit {
     this._service.viewEventTypes()
     .subscribe(
       data => {
-        console.log(data)
+        //console.log(data)
         this.allEventTypes = data;
       },
       error => console.log(error)
@@ -35,7 +35,7 @@ export class SamyakEventsComponent implements OnInit {
     this._service.allEvents()
     .subscribe(
       data => {
-        console.log(data)
+        //console.log(data)
         this.allEvents = data;
         this.dataSource = this.allEvents;
       },
@@ -63,7 +63,10 @@ export class SamyakEventsComponent implements OnInit {
 
      this._service.userPageAccess(p3)
      .subscribe(
-       data => {this.canDelete = Boolean(data),console.log(this.canDelete)},
+       data => {
+         this.canDelete = Boolean(data)
+         //console.log(this.canDelete)
+       },
        error => console.log(error)
      );
 
@@ -204,10 +207,10 @@ export class AddEventType {
 
     addType(){
       let tmp = {name: this.addEventType.value.typeName};
-      console.log(tmp);
+      //console.log(tmp);
       this._service.addEventType(tmp)
       .subscribe(
-        data => console.log(data),
+        data => console.log('loaded'),
         error => console.log(error)
       )
     }
@@ -223,7 +226,7 @@ export class DisplayEventType {
   constructor(
     public dialogRef: MatDialogRef<DisplayEventType>,
     @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
-      console.log(data);
+      //console.log(data);
     }
     onNoClick(): void{
       this.dialogRef.close();
@@ -310,7 +313,7 @@ export class AddEvent {
       };
       this._service.addEvent(tmp)
       .subscribe(
-        data => console.log(data),
+        data => console.log('loaded'),
         error => console.log(error)
       );
     }
@@ -343,7 +346,7 @@ export class AddCsvFile {
           console.log('inside event');
           this._service.uploadEventCsv(formData)
           .subscribe(
-            data => console.log(data),
+            data => console.log('loaded'),
             error => console.log(error)
           );
         }
@@ -351,7 +354,7 @@ export class AddCsvFile {
           console.log('inside csv');
           this._service.uploadTechTalkCsv(formData)
           .subscribe(
-            data => console.log(data),
+            data => console.log('loaded'),
             error => console.log(error)
           );
         }
@@ -384,7 +387,7 @@ export class DeleteEvent {
     let tmp = {eventId: this.data._id};
     this._service.deleteEvent(tmp)
     .subscribe(
-      data => console.log(data),
+      data => console.log('loaded'),
       error => console.log(error)
     )
   }
@@ -433,10 +436,10 @@ export class EditEvent {
     let tmp = {name: this.editEventsForm.value.name , eventId: this.data.formdata._id , department: this.editEventsForm.value.department , organiser: this.editEventsForm.value.organiser , description: this.editEventsForm.value.description ,
        venue: this.editEventsForm.value.venue  ,
       type: this.editEventsForm.value.type , code: this.editEventsForm.value.code , faculty_organiser: this.editEventsForm.value.faculty_organiser , faculty_contact: this.editEventsForm.value.faculty_contact};
-    console.log(tmp);
+    //console.log(tmp);
     this._service.editEvent(tmp)
     .subscribe(
-      data =>  console.log(data),
+      data =>  console.log('loaded'),
       error => console.log(error)
     );
   }
@@ -475,14 +478,14 @@ export class AddBatch {
       }
 
       getBatch(tmp){
-        console.log(tmp);
+        //console.log(tmp);
         console.log("calling batches");
         this._service.getEventBatches(tmp)
         .subscribe(
           data => {
-            console.log(data);
+            //console.log(data);
             this.allBatches = data['slots'];
-            console.log(this.allBatches);
+            //console.log(this.allBatches);
           },
           error => console.log(error)
         );
@@ -493,7 +496,7 @@ export class AddBatch {
         this._service.deleteBatch(sltId)
         .subscribe(
           data => {
-            console.log(data);
+            //console.log(data);
             let tmp = {eventId: this.data._id};
             this.getBatch(tmp);
           },
@@ -519,7 +522,7 @@ export class AddBatch {
         this._service.addEventBatch(tmp)
         .subscribe(
           data => {
-            console.log(data);
+            //console.log(data);
             let tmp = {eventId: this.data._id};
             this.getBatch(tmp);
             this.addBatchesForm.controls['name'].reset();
@@ -565,7 +568,7 @@ export class AddDepartment {
           data => {
             console.log(data);
             this.allDepartments = data;
-            console.log(this.allDepartments);
+            //console.log(this.allDepartments);
           },
           error => console.log(error)
         );
@@ -576,7 +579,7 @@ export class AddDepartment {
         this._service.deleteDepartment(demartmentId)
         .subscribe(
           data => {
-            console.log(data);
+            //console.log(data);
             this.getDepartment();
           },
           error => console.log(error)
@@ -587,7 +590,7 @@ export class AddDepartment {
         this._service.editDepartment(demartment)
         .subscribe(
           data => {
-            console.log(data);
+            //console.log(data);
             this.getDepartment();
           },
           error => console.log(error)
@@ -605,7 +608,7 @@ export class AddDepartment {
         this._service.addDepartment(tmp)
         .subscribe(
           data => {
-            console.log(data);
+            //console.log(data);
             this.getDepartment();
             this.addDepartmentsForm.controls['name'].reset();
           },

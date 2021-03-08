@@ -24,7 +24,7 @@ export class SamyakUsersComponent implements OnInit {
       data => {
         this.usersData = data;
         this.dataSource = this.usersData;
-        console.log(this.dataSource);
+        //console.log(this.dataSource);
       },
       error => console.log(error)
     );
@@ -33,7 +33,7 @@ export class SamyakUsersComponent implements OnInit {
     .subscribe(
       data => {
         this.userRoles = data['user_roles'];
-        console.log(data);
+        //console.log(data);
       },
       error => console.log(error)
     );
@@ -42,7 +42,7 @@ export class SamyakUsersComponent implements OnInit {
     .subscribe(
       data => {
         this.allRolesData = data['roles'];
-        console.log(data);
+        //console.log(data);
       },
       error => console.log(error)
     )
@@ -86,7 +86,7 @@ disable(element){
   this._service.disableUser(id)
   .subscribe(
     data => {
-        console.log(data),
+        //console.log(data),
         this.ngOnInit()
       },
     error => console.log(error)
@@ -144,7 +144,7 @@ export class ConformDelete {
     let tmp  = {userId : this.data.userId};
     this._service.deleteUser(tmp)
     .subscribe(
-      data => console.log(data),
+      data => console.log('data'),
       error => console.log(error)
     );
     this._bottomSheet.dismiss();
@@ -179,7 +179,7 @@ export class EditUsers {
     }
 
     edit(){
-        console.log(this.editForm.value.name);
+        //console.log(this.editForm.value.name);
         let tmp = {
           name: this.editForm.value.name,
           email: this.editForm.getRawValue().email,
@@ -192,7 +192,7 @@ export class EditUsers {
         }
         this._service.editUser(tmp)
         .subscribe(
-          data => console.log(data),
+          data => console.log('data'),
           error => console.log(error)
         );
     }
@@ -230,7 +230,7 @@ export class SetPermissions {
   constructor(
     public dialogRef: MatDialogRef<SetPermissions>,
     @Inject(MAT_DIALOG_DATA) public data , private _service: AdminServiceService){
-      console.log(data);
+      console.log('data');
       if(this.data.role == 'none'){
         console.log('none');
       }
@@ -248,16 +248,16 @@ export class SetPermissions {
         let tmp  = {userId: this.data.id};
         this._service.deleteUserRole(tmp)
         .subscribe(
-          data => console.log(data),
+          data => console.log('data'),
           error => console.log(error)
         )
       }
       else{
       let tmp = {userId: this.data.id , RoleId: this.selected};
-      console.log(tmp);
+      //console.log(tmp);
       this._service.addUserRole(tmp)
       .subscribe(
-        data => console.log(data),
+        data => console.log('data'),
         error => console.log(error)
       );
     }
@@ -277,11 +277,11 @@ export class PaymentsData {
   constructor(
     public dialogRef: MatDialogRef<SetPermissions>,
     @Inject(MAT_DIALOG_DATA) public data , private _service: AdminServiceService , private fb: FormBuilder){
-      console.log(data);
+      //console.log(data);
       this._service.singleUserPaymentData(data._id)
       .subscribe(
         data => {
-          console.log(data);
+          console.log('data');
         },
         error => console.log(error)
       );
