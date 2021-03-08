@@ -93,6 +93,17 @@ disable(element){
   )
 }
 
+//Payments data
+paymentData(element){
+  const dialogRef = this.dialog.open(PaymentsData, {
+    width: '990px',
+    data: element
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+  });
+}
+
 permissions(element){
   let r = this.userRoles.find(x => x.user_id == element._id);
   let tmp;
@@ -252,4 +263,31 @@ export class SetPermissions {
     }
     }
 
+}
+
+
+//payments data
+@Component({
+  selector: 'payments-data',
+  templateUrl: 'payments-data.html',
+  styleUrls: ['./samyak-users.component.css']
+})
+export class PaymentsData {
+  editPayment: FormGroup;
+  constructor(
+    public dialogRef: MatDialogRef<SetPermissions>,
+    @Inject(MAT_DIALOG_DATA) public data , private _service: AdminServiceService , private fb: FormBuilder){
+      console.log(data);
+      this._service.singleUserPaymentData(data._id)
+      .subscribe(
+        data => {
+          console.log(data);
+        },
+        error => console.log(error)
+      );
+    }
+
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
 }

@@ -216,6 +216,12 @@ export class AdminServiceService {
     });
   }
 
+  singleUserPaymentData(id):Observable<object>{
+    return this._http.get(this.backendService+'/payments/payments/'+id, {
+      headers: new HttpHeaders().append('x-access-token', localStorage.getItem('token'))
+    });
+  }
+
   addTechTalk(body: any){
     return this._http.post(this.backendService+'/techtalks/add-talk', body, {
       observe: 'body',
