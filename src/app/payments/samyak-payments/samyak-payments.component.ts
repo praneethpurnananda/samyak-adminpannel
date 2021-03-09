@@ -8,7 +8,7 @@ import { AdminServiceService } from "../../admin-service.service";
 })
 export class SamyakPaymentsComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name' ,'samyak_id', 'email', 'payment_id'  , 'bill_via' , 'amount' ,'status'];
+  displayedColumns: string[] = ['position', 'Name' ,'College', 'Branch', 'Year'  , 'College Id' , 'Payment id' ];
   paymentsData;
   dataSource;
   constructor(private _service : AdminServiceService) { }
@@ -17,10 +17,10 @@ export class SamyakPaymentsComponent implements OnInit {
     this._service.paymentsData()
     .subscribe(
       data => {
-        //console.log(data);
+        console.log(data);
         this.paymentsData = data['payments'];
         this.dataSource = this.paymentsData;
-        //console.log(this.dataSource);
+        console.log(this.dataSource);
       },
       error => console.log(error)
     );

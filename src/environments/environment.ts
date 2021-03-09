@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendService: 'https://klsamyak-dev.tk'
+  backendService: 'https://klsamyak.in/api'
 };
 
 /*
