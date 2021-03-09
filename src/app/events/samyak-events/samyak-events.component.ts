@@ -402,6 +402,7 @@ export class DeleteEvent {
 export class EditEvent {
 
   editEventsForm: FormGroup;
+  private imageSrc: string = '';
   departments;
 
 
@@ -425,9 +426,29 @@ export class EditEvent {
           venue: [{value: data.formdata.venue , disabled: false}, Validators.required],
           type: [{value: data.formdata.type[0]._id , disabled: false}, Validators.required],
           faculty_organiser: [{value: data.formdata.faculty_organiser , disabled: false}],
-          faculty_contact: [{value: data.formdata.faculty_contact , disabled: false}]
+          faculty_contact: [{value: data.formdata.faculty_contact , disabled: false}],
         });
       }
+
+      handleInputChange(e) {
+        var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+        var pattern = /image-*/;
+        var reader = new FileReader();
+        if (!file.type.match(pattern)) {
+          alert('invalid format');
+          return;
+        }
+        reader.onload = this._handleReaderLoaded.bind(this);
+        reader.readAsDataURL(file);
+      }
+
+    _handleReaderLoaded(e) {
+      let reader = e.target;
+      this.imageSrc = reader.result;
+      console.log(this.imageSrc)
+    }
+
+
   onNoClick(): void{
     this.dialogRef.close();
   }
@@ -435,7 +456,7 @@ export class EditEvent {
   edit(){
     let tmp = {name: this.editEventsForm.value.name , eventId: this.data.formdata._id , department: this.editEventsForm.value.department , organiser: this.editEventsForm.value.organiser , description: this.editEventsForm.value.description ,
        venue: this.editEventsForm.value.venue  ,
-      type: this.editEventsForm.value.type , code: this.editEventsForm.value.code , faculty_organiser: this.editEventsForm.value.faculty_organiser , faculty_contact: this.editEventsForm.value.faculty_contact};
+      type: this.editEventsForm.value.type , code: this.editEventsForm.value.code , faculty_organiser: this.editEventsForm.value.faculty_organiser , faculty_contact: this.editEventsForm.value.faculty_contact , image: this.imageSrc};
     //console.log(tmp);
     this._service.editEvent(tmp)
     .subscribe(
