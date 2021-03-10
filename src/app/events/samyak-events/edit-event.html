@@ -58,6 +58,10 @@
           <textarea  matInput id="description" formControlName="description"></textarea>
         </mat-form-field>
 
+        <br>
+  
+        <input name="imageUrl" type="file" accept="image/*" (change)="handleInputChange($event)" />
+
       </form>
   </div>
 </mat-dialog-content>
