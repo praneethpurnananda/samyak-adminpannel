@@ -1,5 +1,20 @@
 <br>
-
+<br>
+<form novalidate [formGroup]="filterForm" #fform="ngForm" style="align-items: center;">
+  <mat-form-field>
+    <mat-label>college</mat-label>
+    <input matInput  formControlName="college">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>branch</mat-label>
+    <input matNativeControl  formControlName="branch">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Year</mat-label>
+    <input matNativeControl formControlName="current_year">
+  </mat-form-field>
+  <button mat-button color="primary" (click)="filterUsers()">filter</button>
+</form>
 <div class="table">
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

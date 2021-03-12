@@ -20,7 +20,12 @@ export class SamyakEventsComponent implements OnInit {
   canAccessSlots:boolean = false;
   canAccessParticipants:boolean = false;
   alldepartments;
-  constructor(public dialog: MatDialog,private _service: AdminServiceService) { }
+  filterForm:FormGroup;
+  constructor(public dialog: MatDialog,private _service: AdminServiceService,private fb:FormBuilder) {
+    this.filterForm = this.fb.group({
+      department:[''],
+    });
+   }
 
   ngOnInit(): void {
     this._service.viewEventTypes()
@@ -35,7 +40,7 @@ export class SamyakEventsComponent implements OnInit {
     this._service.allEvents()
     .subscribe(
       data => {
-        //console.log(data)
+        console.log(data)
         this.allEvents = data;
         this.dataSource = this.allEvents;
       },
@@ -84,6 +89,20 @@ export class SamyakEventsComponent implements OnInit {
 
   }
 
+  
+  filterUsers () {
+    this.dataSource=this.allEvents;
+    let filter=this.filterForm.value;
+    console.log(filter)
+    for (var prop in filter) {
+      if(filter[prop]==="" || filter[prop]==="2"){
+        continue;
+      }
+      else{
+        this.dataSource=this.dataSource.filter(x => x[prop]==filter[prop]);
+      }
+    }
+  }
   addEventType(){
     const dialogRef = this.dialog.open(AddEventType, {
       width: '500px',

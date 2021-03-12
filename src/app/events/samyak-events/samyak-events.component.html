@@ -7,7 +7,13 @@
 </div>
 
 <br><br>
-
+<!-- <form novalidate [formGroup]="filterForm" #fform="ngForm">
+<mat-form-field>
+  <mat-label>college</mat-label>
+  <input matInput  formControlName="college">
+</mat-form-field>
+<button mat-button color="primary" (click)="filterUsers()">filter</button>
+</form> -->
 <div class="table">
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

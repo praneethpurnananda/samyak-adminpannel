@@ -16,7 +16,15 @@ export class SamyakUsersComponent implements OnInit {
   dataSource;
   userRoles;
   allRolesData;
-  constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private _service: AdminServiceService) { }
+  filterForm:FormGroup;
+  constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private _service: AdminServiceService,private fb:FormBuilder) { 
+    this.filterForm = this.fb.group({
+      // email_verified:['2'],
+      // gender:[''],
+      // status:['2'],
+      college:[''],
+    });
+  }
 
   ngOnInit(): void {
     this._service.getAllUsers()
@@ -48,6 +56,19 @@ export class SamyakUsersComponent implements OnInit {
     )
   }
 
+  filterUsers () {
+    this.dataSource=this.usersData;
+    let filter=this.filterForm.value;
+    console.log(filter)
+    for (var prop in filter) {
+      if(filter[prop]==="" || filter[prop]==="2"){
+        continue;
+      }
+      else{
+        this.dataSource=this.dataSource.filter(x => x[prop]==filter[prop]);
+      }
+    }
+  }
 edit(element){
   const dialogRef = this.dialog.open(EditUsers, {
     width: '900px',
