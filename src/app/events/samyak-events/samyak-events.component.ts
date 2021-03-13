@@ -24,6 +24,7 @@ export class SamyakEventsComponent implements OnInit {
   constructor(public dialog: MatDialog,private _service: AdminServiceService,private fb:FormBuilder) {
     this.filterForm = this.fb.group({
       department:[''],
+      type:['']
     });
    }
 
@@ -37,10 +38,16 @@ export class SamyakEventsComponent implements OnInit {
       error => console.log(error)
     );
 
+    this._service.getDepartments()
+    .subscribe(
+      data => this.alldepartments = data,
+      error=> console.log(error)
+    );
+
     this._service.allEvents()
     .subscribe(
       data => {
-        console.log(data)
+        console.log(data);
         this.allEvents = data;
         this.dataSource = this.allEvents;
       },
@@ -90,18 +97,20 @@ export class SamyakEventsComponent implements OnInit {
   }
 
   
-  filterUsers () {
+  filter () {
     this.dataSource=this.allEvents;
     let filter=this.filterForm.value;
-    console.log(filter)
-    for (var prop in filter) {
-      if(filter[prop]==="" || filter[prop]==="2"){
-        continue;
+    console.log(filter.type);
+      if(filter.type!=="" || filter.type!=="none"){
+        this.dataSource=this.dataSource.filter(x => x.type[0].name==filter.type);
       }
-      else{
-        this.dataSource=this.dataSource.filter(x => x[prop]==filter[prop]);
+      if(filter.department!==""||filter.department!=="none"){
+        this.dataSource=this.dataSource.filter(x => x.department[0].name==filter.department);
       }
-    }
+  }
+  resetFilter(){
+    this.filterForm.reset();
+     this.filter();
   }
   addEventType(){
     const dialogRef = this.dialog.open(AddEventType, {

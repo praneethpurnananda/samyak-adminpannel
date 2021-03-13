@@ -37,7 +37,7 @@ export class SamyakPaymentsComponent implements OnInit {
     this.dataSource=this.paymentsData;
     let filter=this.filterForm.value;
     for (var prop in filter) {
-      if(filter[prop]==="" || filter[prop]==="2"){
+      if(filter[prop]===""){
         continue;
       }
       else{
