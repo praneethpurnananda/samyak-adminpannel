@@ -11,7 +11,7 @@ import { AdminServiceService } from "../../admin-service.service";
 })
 export class SamyakUsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name' ,'samyak_id', 'email', 'mobile' , 'college' , 'college_id' , 'email_verified', 'more'];
+  displayedColumns: string[] = ['position', 'name', 'email', 'mobile' , 'college' , 'college_id' ,'branch', 'email_verified', 'more'];
   usersData;
   dataSource;
   userRoles;
@@ -20,10 +20,11 @@ export class SamyakUsersComponent implements OnInit {
   isLoading:boolean = true;
   constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private _service: AdminServiceService,private fb:FormBuilder) {
     this.filterForm = this.fb.group({
-      email_verified:['2'],
       gender:[''],
       status:['2'],
       college:[''],
+      college_id:[''],
+      branch:['']
     });
   }
 
@@ -75,6 +76,17 @@ export class SamyakUsersComponent implements OnInit {
         this.dataSource=this.dataSource.filter(x => x[prop]==filter[prop]);
       }
     }
+  }
+  reset ()
+  {
+    this.filterForm.reset({
+     gender:'',
+      status:'2',
+      college:'',
+      college_id:'',
+      branch:''
+    });
+    this.filterUsers();
   }
 edit(element){
   const dialogRef = this.dialog.open(EditUsers, {
