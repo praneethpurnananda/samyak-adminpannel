@@ -11,6 +11,24 @@ table {
   margin-right: 1%;
 }
 
+.loader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filters{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.filter-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .test{
   background-color: #dddddd;
   color: #000;

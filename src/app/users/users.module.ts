@@ -18,6 +18,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { SamyakUsersComponent, EditUsers, ConformDelete, MoreInfo, SetPermissions, PaymentsData} from './samyak-users/samyak-users.component';
 
@@ -43,7 +44,8 @@ import { SamyakUsersComponent, EditUsers, ConformDelete, MoreInfo, SetPermission
     MatDialogModule,
     MatBottomSheetModule,
     MatListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
    EditUsers,ConformDelete,MoreInfo,SetPermissions,PaymentsData

@@ -17,24 +17,31 @@ export class SamyakUsersComponent implements OnInit {
   userRoles;
   allRolesData;
   filterForm:FormGroup;
-  constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private _service: AdminServiceService,private fb:FormBuilder) { 
+  isLoading:boolean = true;
+  constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private _service: AdminServiceService,private fb:FormBuilder) {
     this.filterForm = this.fb.group({
-      // email_verified:['2'],
-      // gender:[''],
-      // status:['2'],
+      email_verified:['2'],
+      gender:[''],
+      status:['2'],
       college:[''],
     });
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this._service.getAllUsers()
     .subscribe(
       data => {
+        this.isLoading = true;
         this.usersData = data;
         this.dataSource = this.usersData;
+        this.isLoading = false;
         //console.log(this.dataSource);
       },
-      error => console.log(error)
+      error => {
+        this.isLoading = false;
+        console.log(error)
+      }
     );
 
     this._service.userRoles()
