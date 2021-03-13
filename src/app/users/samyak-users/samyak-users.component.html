@@ -8,8 +8,8 @@
 <br>
 <br>
 <!-- <p>{{ filterForm.value | json }}</p> -->
-<form novalidate [formGroup]="filterForm" #fform="ngForm">
-  <!-- <mat-form-field >
+<form novalidate [formGroup]="filterForm" #fform="ngForm" class="filters">
+  <mat-form-field appearance="outline">
     <mat-label>email verified</mat-label>
     <select matNativeControl formControlName="email_verified">
       <option value=2>all</option>
@@ -17,7 +17,7 @@
       <option value=0>not verified</option>
     </select>
   </mat-form-field>
-  <mat-form-field >
+  <mat-form-field appearance="outline">
     <mat-label>account status</mat-label>
     <select matNativeControl  formControlName="status">
       <option value=2>all</option>
@@ -25,21 +25,29 @@
       <option value=0>disabled</option>
     </select>
   </mat-form-field>
-  <mat-form-field >
+  <mat-form-field appearance="outline">
     <mat-label>gender</mat-label>
     <select matNativeControl required formControlName="gender">
       <option value="">all</option>
       <option value="Male">Male</option>
       <option value="Female">Female</option>
     </select>
-  </mat-form-field> -->
-  <mat-form-field>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>college</mat-label>
     <input matInput  formControlName="college">
   </mat-form-field>
-  <button mat-button color="primary" (click)="filterUsers()">filter</button>
 </form>
+<div class="filter-btn">
+<button mat-flat-button color="primary" (click)="filterUsers()">Search</button> &nbsp;&nbsp;&nbsp;
+<button mat-flat-button color="primary">Reset filters</button>
+</div>
+<br><br>
 <!--data table-->
+<div *ngIf="isLoading; else loaded" class="loader">
+  <mat-spinner></mat-spinner>
+</div>
+<ng-template #loaded>
 <div class="table">
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -63,7 +71,7 @@
     <th mat-header-cell *matHeaderCellDef> Samyak id </th>
     <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.samyak_id}} </td>
   </ng-container>
-
+  &nbsp;&nbsp;
   <!-- Symbol Column -->
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef> Email </th>
@@ -152,3 +160,4 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 </div>
+</ng-template>
