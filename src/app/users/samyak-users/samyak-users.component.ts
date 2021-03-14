@@ -11,7 +11,7 @@ import { AdminServiceService } from "../../admin-service.service";
 })
 export class SamyakUsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'email', 'mobile' , 'college' , 'college_id' ,'branch', 'email_verified', 'more'];
+  displayedColumns: string[] = ['position', 'name','Created Date', 'email', 'mobile' , 'college' , 'college_id' ,'branch', 'email_verified', 'more'];
   usersData;
   dataSource;
   userRoles;
@@ -37,7 +37,7 @@ export class SamyakUsersComponent implements OnInit {
         this.usersData = data;
         this.dataSource = this.usersData;
         this.isLoading = false;
-        //console.log(this.dataSource);
+        console.log(this.dataSource);
       },
       error => {
         this.isLoading = false;

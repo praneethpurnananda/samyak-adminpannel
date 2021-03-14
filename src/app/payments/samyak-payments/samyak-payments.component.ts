@@ -9,7 +9,7 @@ import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirect
 })
 export class SamyakPaymentsComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'Name' ,'College', 'Branch', 'Year'  , 'College Id' , 'Payment id' ];
+  displayedColumns: string[] = ['position', 'Name' ,'College', 'Branch', 'Year','Payment Date','College Id', 'Payment id' ];
   paymentsData;
   dataSource;
   filterForm:FormGroup;
@@ -27,7 +27,7 @@ export class SamyakPaymentsComponent implements OnInit {
       data => {
         this.paymentsData = data['payments'];
         this.dataSource = this.paymentsData;
-        console.log(this.dataSource[0].user[0].name);
+        console.log(this.dataSource);
       },
       error => console.log(error)
     );

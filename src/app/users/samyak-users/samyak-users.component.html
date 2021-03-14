@@ -74,17 +74,17 @@
     <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.name}} </td>
   </ng-container>
 
-  <!-- <ng-container matColumnDef="samyak_id">
-    <th mat-header-cell *matHeaderCellDef> Samyak id </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.samyak_id}} </td>
-  </ng-container>
-  &nbsp;&nbsp; -->
+  &nbsp;&nbsp;
   <!-- Symbol Column -->
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef> Email </th>
     <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.email}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="Created Date">
+    <th mat-header-cell *matHeaderCellDef> Created Date </th>
+    <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.created_at | date:'shortDate'}} </td>
+  </ng-container>
 <!--book mark-->
   <!-- Symbol Column -->
   <ng-container matColumnDef="mobile">
