@@ -121,7 +121,6 @@ export class SamyakEventsComponent implements OnInit {
     }
 
 
-  filterUsers () {
   filter () {
     this.dataSource=this.allEvents;
     let filter=this.filterForm.value;
