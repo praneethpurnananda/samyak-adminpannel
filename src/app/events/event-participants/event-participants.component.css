@@ -16,8 +16,13 @@
     color: #000;
   }
 
-
   .form{
     margin-left: 2%;
     margin-bottom: 2%;
+  }
+
+  .loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }

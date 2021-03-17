@@ -1,22 +1,34 @@
 <br>
 <br>
-<form novalidate [formGroup]="filterForm" #fform="ngForm" style="align-items: center;">
-  <mat-form-field>
+<form novalidate [formGroup]="filterForm" #fform="ngForm" class="filter">
+  <mat-form-field  appearance="outline">
     <mat-label>college</mat-label>
     <input matInput  formControlName="college">
-  </mat-form-field>
-  <mat-form-field >
+  </mat-form-field> &nbsp;&nbsp;&nbsp;
+  <mat-form-field  appearance="outline">
     <mat-label>branch</mat-label>
     <input matNativeControl  formControlName="branch">
-  </mat-form-field>
-  <mat-form-field >
+  </mat-form-field> &nbsp;&nbsp;
+  <mat-form-field  appearance="outline">
     <mat-label>Year</mat-label>
     <input matNativeControl formControlName="current_year">
-  </mat-form-field>
-  <button mat-button color="primary" (click)="filterUsers()">filter</button>
+  </mat-form-field> &nbsp;&nbsp;
 </form>
+<br>
+<div class="btn">
+  <button mat-flat-button color="primary" (click)="filterUsers()">filter</button>
+</div>
+<br><br>
+<div class="loader" *ngIf="isLoading; else loaded">
+  <mat-spinner></mat-spinner>
+</div>
+<ng-template #loaded>
+<div class="download" style="float: right">
+  <button mat-flat-button color="primary" (click)="exportexcel()">Download CSV</button>&nbsp;&nbsp;&nbsp;
+</div>
+<br> <br>
 <div class="table">
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="excel-table">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -59,6 +71,7 @@
     <th mat-header-cell *matHeaderCellDef> College Id</th>
     <td mat-cell *matCellDef="let element"> {{element.user[0].college_id}}</td>
   </ng-container>
+
   <!-- Symbol Column -->
   <ng-container matColumnDef="Payment id">
     <th mat-header-cell *matHeaderCellDef> Payment id </th>
@@ -78,3 +91,4 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 </div>
+</ng-template>

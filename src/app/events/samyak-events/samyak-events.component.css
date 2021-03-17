@@ -10,11 +10,20 @@
   margin-left: 2%;
 }
 
+.loader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .event-form{
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+
+.download{
+  float: right;
 }
 
 .event-form .example-full-width-one{

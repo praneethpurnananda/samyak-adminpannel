@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from "../../admin-service.service";
 import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirective} from '@angular/forms';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-samyak-payments',
@@ -13,6 +14,8 @@ export class SamyakPaymentsComponent implements OnInit {
   paymentsData;
   dataSource;
   filterForm:FormGroup;
+  fileName= 'PaymentsData.xlsx';
+  isLoading:boolean = true;
   constructor(private _service : AdminServiceService,private fb:FormBuilder) {
     this.filterForm = this.fb.group({
       college:[''],
@@ -22,16 +25,35 @@ export class SamyakPaymentsComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this._service.paymentsData()
     .subscribe(
       data => {
+        this.isLoading = false;
         this.paymentsData = data['payments'];
         this.dataSource = this.paymentsData;
-        console.log(this.dataSource);
       },
-      error => console.log(error)
+      error =>{
+        this.isLoading = false;
+        console.log(error)
+       }
     );
   }
+
+  //export to excel
+  exportexcel(): void {
+       /* table id is passed over here */
+       let element = document.getElementById('excel-table');
+       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+       /* generate workbook and add the worksheet */
+       const wb: XLSX.WorkBook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+       /* save to file */
+       XLSX.writeFile(wb, this.fileName);
+    }
+
 
   filterUsers () {
     this.dataSource=this.paymentsData;

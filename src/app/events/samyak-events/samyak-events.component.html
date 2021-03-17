@@ -7,6 +7,24 @@
 </div>
 
 <br><br>
+
+<!-- <form novalidate [formGroup]="filterForm" #fform="ngForm">
+<mat-form-field>
+  <mat-label>college</mat-label>
+  <input matInput  formControlName="college">
+</mat-form-field>
+<button mat-button color="primary" (click)="filterUsers()">filter</button>
+</form> -->
+<div *ngIf="isLoading;else loaded" class="loader">
+  <mat-spinner></mat-spinner>
+</div>
+<ng-template #loaded>
+<div class="download">
+  <button mat-flat-button color="primary" (click)="exportexcel()">Download CSV</button>&nbsp;&nbsp;&nbsp;
+</div>
+<br> <br>
+<div class="table">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="excel-table">
 <form novalidate class="example-form" style="padding: 0px 30px;"  [formGroup]="filterForm" #fform="ngForm">
   <mat-form-field class="example-full-width-one" style="margin-left: 5px;" appearance="outline">
     <mat-label>Department</mat-label>
@@ -115,3 +133,4 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 </div>
+</ng-template>

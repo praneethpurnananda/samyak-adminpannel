@@ -3,6 +3,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirective} from '@angular/forms';
 import {MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
 import { AdminServiceService } from "../../admin-service.service";
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-samyak-users',
@@ -18,6 +19,7 @@ export class SamyakUsersComponent implements OnInit {
   allRolesData;
   filterForm:FormGroup;
   isLoading:boolean = true;
+  fileName= 'UsersData.xlsx';
   constructor(public dialog: MatDialog,private _bottomSheet: MatBottomSheet,private _service: AdminServiceService,private fb:FormBuilder) {
     this.filterForm = this.fb.group({
       gender:[''],
@@ -63,6 +65,21 @@ export class SamyakUsersComponent implements OnInit {
       error => console.log(error)
     )
   }
+
+  //export to excel
+  exportexcel(): void {
+       /* table id is passed over here */
+       let element = document.getElementById('excel-table');
+       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+       /* generate workbook and add the worksheet */
+       const wb: XLSX.WorkBook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+       /* save to file */
+       XLSX.writeFile(wb, this.fileName);
+    }
+
 
   filterUsers () {
     this.dataSource=this.usersData;
