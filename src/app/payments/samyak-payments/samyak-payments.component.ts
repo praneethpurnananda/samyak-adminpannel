@@ -55,7 +55,7 @@ export class SamyakPaymentsComponent implements OnInit {
     }
 
 
-  filterUsers () {
+  filterPayments () {
     this.dataSource=this.paymentsData;
     let filter=this.filterForm.value;
     for (var prop in filter) {
