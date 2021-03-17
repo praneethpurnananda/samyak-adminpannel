@@ -539,17 +539,18 @@ export class AddBatch {
       }
 
       editslot(element){
+        this.dialogRef.close();
         let tmp = {formdata: element , batch: this.allBatches};
         const dialogRef = this.dialog.open(Editslot, {
           width: '990px',
           data: tmp,
         });
-        dialogRef.afterClosed().subscribe(result => {
-          if(result){
-            // this.ngOnInit();
-            window.location.reload();
-          }
-        });
+        // dialogRef.afterClosed().subscribe(result => {
+        //   if(result){
+        //     // this.ngOnInit();
+        //     window.location.reload();
+        //   }
+        // });
       }
 
       delete(item){
@@ -620,15 +621,16 @@ export class Editslot{
   constructor(
     public dialogRef: MatDialogRef<EditEvent>,
       @Inject(MAT_DIALOG_DATA) public data,private fb: FormBuilder, private _service: AdminServiceService){
-        console.log(this.data);
+        // console.log(this.data);
+        console.log(this.data.formdata);
         this.editBatchesForm = this.fb.group({
-          name: [{value: data.formdata.name , disabled: false}, Validators.required],
-          meet_link: [{value: data.formdata.meet_link , disabled: false}, Validators.required],
-          event: [{value: data.event , disabled: true}, Validators.required],
-          multiple_events_allowed: [{value: data.formdata.multiple_events_allowed, disabled: false}, Validators.required],
-          date: [{value: data.formdata.data, disabled: false}, Validators.required],
-          start_time: [{value: data.formdata.start_time, disabled: false},, Validators.required],
-          end_time: [{value: data.formdata.end_time, disabled: false}, Validators.required]
+          name: [{value: data.formdata.name , disabled: false},Validators.required],
+          meet_link: [{value: data.formdata.meet_link , disabled: false},Validators.required],
+          event: [{value: data.event , disabled: true},Validators.required],
+          multiple_events_allowed: [{value: data.formdata.multiple_events_allowed, disabled: false},Validators.required],
+          date: [{value: data.formdata.data, disabled: false},Validators.required],
+          start_time: [{value: data.formdata.start_time, disabled: false},Validators.required],
+          end_time: [{value: data.formdata.end_time, disabled: false},Validators.required]
         });
       }
 
@@ -638,15 +640,15 @@ export class Editslot{
 
   edit(){
     let tmp = {
+      _id:this.data.formdata._id,
       name: this.editBatchesForm.value.name,
       meet_link: this.editBatchesForm.value.meet_link,
       date: this.editBatchesForm.value.date,
       start_time: this.editBatchesForm.value.start_time,
       end_time: this.editBatchesForm.value.end_time,
-      event: this.editBatchesForm.getRawValue().event,
-      eventId: this.data._id,
       multiple_events_allowed: this.editBatchesForm.value.multiple_events_allowed
     };
+    console.log(tmp);
     this._service.editSlot(tmp)
     .subscribe(
       data =>  console.log('loaded'),
