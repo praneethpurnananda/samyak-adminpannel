@@ -13,9 +13,18 @@
 
 <button mat-flat-button color="primary" class="add-btn" (click)="addBatch()" [disabled]="!this.batchesList.valid">Add Batch</button>
 </div>
+<br><br>
+<div *ngIf="isLoading;else loaded" class="loader">
+  <mat-spinner></mat-spinner>
+</div>
+<ng-template #loaded>
+<div class="download" style="float: left;margin-left: 2%">
+  <button mat-flat-button color="primary" (click)="exportexcel()">Download CSV</button>
+</div>
+<br> <br> <br>
 <!--data table-->
 <div class="table">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="excel-table">
 
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -79,7 +88,7 @@
         <th mat-header-cell *matHeaderCellDef> Slot </th>
         <td mat-cell *matCellDef="let element" >
           <div *ngFor="let item of element.user[0].slot">
-            {{item.name}} , 
+            {{item.name}} ,
           </div>
         </td>
       </ng-container>
@@ -108,3 +117,4 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     </div>
+    </ng-template>

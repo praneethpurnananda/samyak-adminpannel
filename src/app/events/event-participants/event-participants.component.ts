@@ -5,7 +5,7 @@ import { AdminServiceService } from "../../admin-service.service";
 import { participant } from "./participant";
 import { SelectionModel } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
-
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-event-participants',
@@ -19,7 +19,8 @@ export class EventParticipantsComponent implements OnInit {
   participantsData;
   registrationsData;
   eventId;
-
+  fileName= 'ParticipantsData.xlsx';
+  isLoading:boolean = true;
     batchesList: FormGroup;
     constructor(public dialog: MatDialog,
       private route:ActivatedRoute,private _service: AdminServiceService,
@@ -30,6 +31,7 @@ export class EventParticipantsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      this.isLoading = true;
       // this.route.data.subscribe(
       //   data => console.log(data),
       //   error => console.log(error)
@@ -51,6 +53,7 @@ export class EventParticipantsComponent implements OnInit {
       this._service.getEventParticipantsList(id)
       .subscribe(
         data => {
+          this.isLoading = false;
           //console.log(data);
           this.registrationsData = data['registrations'];
           // console.log(this.registrationsData);
@@ -59,9 +62,26 @@ export class EventParticipantsComponent implements OnInit {
           this.dataSource = this.participantsData;
           //console.log(this.dataSource);
         },
-        error => console.log(error)
+        error => {
+          this.isLoading = false;
+          console.log(error)
+        }
       );
     }
+
+    //export to excel
+    exportexcel(): void {
+         /* table id is passed over here */
+         let element = document.getElementById('excel-table');
+         const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+         /* generate workbook and add the worksheet */
+         const wb: XLSX.WorkBook = XLSX.utils.book_new();
+         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+         /* save to file */
+         XLSX.writeFile(wb, this.fileName);
+      }
 
     addBatch(){
       let tmp = {

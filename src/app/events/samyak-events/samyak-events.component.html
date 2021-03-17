@@ -14,8 +14,16 @@
 </mat-form-field>
 <button mat-button color="primary" (click)="filterUsers()">filter</button>
 </form> -->
+<div *ngIf="isLoading;else loaded" class="loader">
+  <mat-spinner></mat-spinner>
+</div>
+<ng-template #loaded>
+<div class="download">
+  <button mat-flat-button color="primary" (click)="exportexcel()">Download CSV</button>&nbsp;&nbsp;&nbsp;
+</div>
+<br> <br>
 <div class="table">
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="excel-table">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -102,3 +110,4 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 </div>
+</ng-template>

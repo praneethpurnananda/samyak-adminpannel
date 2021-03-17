@@ -19,6 +19,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { SamyakEventsComponent,AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch,AddDepartment} from './samyak-events/samyak-events.component';
 import { EventParticipantsComponent , DeleteSlot} from './event-participants/event-participants.component';
@@ -47,7 +48,8 @@ import { TechTalksComponent , AddTechTalk } from './tech-talks/tech-talks.compon
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   providers: [AddEventType,AddEvent,DisplayEventType,AddCsvFile,DeleteEvent,EditEvent,AddBatch,DeleteSlot,AddTechTalk,AddDepartment],
 })

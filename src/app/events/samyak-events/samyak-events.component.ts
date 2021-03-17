@@ -3,6 +3,7 @@ import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirect
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AdminServiceService } from "../../admin-service.service";
 import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-samyak-events',
@@ -21,6 +22,8 @@ export class SamyakEventsComponent implements OnInit {
   canAccessParticipants:boolean = false;
   alldepartments;
   filterForm:FormGroup;
+  fileName= 'EventsData.xlsx';
+  isLoading:boolean = true;
   constructor(public dialog: MatDialog,private _service: AdminServiceService,private fb:FormBuilder) {
     this.filterForm = this.fb.group({
       department:[''],
@@ -28,6 +31,7 @@ export class SamyakEventsComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this._service.viewEventTypes()
     .subscribe(
       data => {
@@ -40,13 +44,17 @@ export class SamyakEventsComponent implements OnInit {
     this._service.allEvents()
     .subscribe(
       data => {
-        console.log(data)
+        this.isLoading = false;
+        //console.log(data)
         this.allEvents = data;
         this.dataSource = this.allEvents;
       },
-      error => console.log(error)
+      error => {
+        this.isLoading = false;
+        console.log(error)
+      }
     );
-
+    
 
      let p1 = {collection: 'Events', permission: 'add'};
      let p2 = {collection: 'Events', permission: 'edit'};
@@ -89,7 +97,21 @@ export class SamyakEventsComponent implements OnInit {
 
   }
 
-  
+  //export to excel
+  exportexcel(): void {
+       /* table id is passed over here */
+       let element = document.getElementById('excel-table');
+       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+       /* generate workbook and add the worksheet */
+       const wb: XLSX.WorkBook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+       /* save to file */
+       XLSX.writeFile(wb, this.fileName);
+    }
+
+
   filterUsers () {
     this.dataSource=this.allEvents;
     let filter=this.filterForm.value;

@@ -17,6 +17,10 @@ table {
   align-items: center;
 }
 
+.download{
+  float: right;
+}
+
 .filters{
   display: flex;
   justify-content: space-around;
