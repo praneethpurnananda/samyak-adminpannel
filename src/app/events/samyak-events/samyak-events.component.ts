@@ -26,7 +26,8 @@ export class SamyakEventsComponent implements OnInit {
   isLoading:boolean = true;
   constructor(public dialog: MatDialog,private _service: AdminServiceService,private fb:FormBuilder) {
     this.filterForm = this.fb.group({
-      department:[''],
+      department:[""],
+      type:[""]
     });
    }
 
@@ -41,11 +42,19 @@ export class SamyakEventsComponent implements OnInit {
       error => console.log(error)
     );
 
+    this._service.getDepartments()
+    .subscribe(
+      data => this.alldepartments = data,
+      error=> console.log(error)
+    );
+
     this._service.allEvents()
     .subscribe(
       data => {
+
         this.isLoading = false;
         //console.log(data)
+        console.log(data);
         this.allEvents = data;
         this.dataSource = this.allEvents;
       },
@@ -113,17 +122,19 @@ export class SamyakEventsComponent implements OnInit {
 
 
   filterUsers () {
+  filter () {
     this.dataSource=this.allEvents;
     let filter=this.filterForm.value;
-    console.log(filter)
-    for (var prop in filter) {
-      if(filter[prop]==="" || filter[prop]==="2"){
-        continue;
+    console.log(filter);
+      if(filter.type!=="" && filter.type!==undefined){
+        this.dataSource=this.dataSource.filter(x => x.type[0].name==filter.type);
       }
-      else{
-        this.dataSource=this.dataSource.filter(x => x[prop]==filter[prop]);
+      if(filter.department!=="" && filter.type!==undefined){
+        this.dataSource=this.dataSource.filter(x => x.department[0].name==filter.department);
       }
-    }
+  }
+  resetFilter(){
+     window.location.reload();
   }
   addEventType(){
     const dialogRef = this.dialog.open(AddEventType, {
@@ -207,7 +218,6 @@ export class SamyakEventsComponent implements OnInit {
       }
     });
   }
-
 
   addDepartments(){
   const dialogRef = this.dialog.open(AddDepartment, {
@@ -522,7 +532,7 @@ export class AddBatch {
     {viewValue: 'Allowed' , value: 1},
     {viewValue: 'Not Allowed' , value: 0}
   ];
-  constructor(
+  constructor(public dialog: MatDialog,
     public dialogRef: MatDialogRef<AddBatch>,
       @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private _service: AdminServiceService){
         this.addBatchesForm = this.fb.group({
@@ -551,6 +561,21 @@ export class AddBatch {
           },
           error => console.log(error)
         );
+      }
+
+      editslot(element){
+        this.dialogRef.close();
+        let tmp = {formdata: element , batch: this.allBatches};
+        const dialogRef = this.dialog.open(Editslot, {
+          width: '990px',
+          data: tmp,
+        });
+        // dialogRef.afterClosed().subscribe(result => {
+        //   if(result){
+        //     // this.ngOnInit();
+        //     window.location.reload();
+        //   }
+        // });
       }
 
       delete(item){
@@ -601,6 +626,62 @@ export class AddBatch {
       displayBatches(){}
 }
 
+//edit
+@Component({
+  selector: 'edit-slot',
+  templateUrl: 'edit-slot.html',
+  styleUrls: ['../../users/samyak-users/samyak-users.component.css']
+})
+export class Editslot{
+  editBatchesForm: FormGroup;
+  multiple_events_allowed = [
+    {viewValue: 'Allowed' , value: 1},
+    {viewValue: 'Not Allowed' , value: 0}
+  ];
+  // editEventsForm: FormGroup;
+  // private imageSrc: string = '';
+  // departments;
+
+
+  constructor(
+    public dialogRef: MatDialogRef<EditEvent>,
+      @Inject(MAT_DIALOG_DATA) public data,private fb: FormBuilder, private _service: AdminServiceService){
+        // console.log(this.data);
+        console.log(this.data.formdata);
+        this.editBatchesForm = this.fb.group({
+          name: [{value: data.formdata.name , disabled: false},Validators.required],
+          meet_link: [{value: data.formdata.meet_link , disabled: false},Validators.required],
+          event: [{value: data.event , disabled: true},Validators.required],
+          multiple_events_allowed: [{value: data.formdata.multiple_events_allowed, disabled: false},Validators.required],
+          date: [{value: data.formdata.data, disabled: false},Validators.required],
+          start_time: [{value: data.formdata.start_time, disabled: false},Validators.required],
+          end_time: [{value: data.formdata.end_time, disabled: false},Validators.required]
+        });
+      }
+
+  onNoClick(): void{
+    this.dialogRef.close();
+  }
+
+  edit(){
+    let tmp = {
+      _id:this.data.formdata._id,
+      name: this.editBatchesForm.value.name,
+      meet_link: this.editBatchesForm.value.meet_link,
+      date: this.editBatchesForm.value.date,
+      start_time: this.editBatchesForm.value.start_time,
+      end_time: this.editBatchesForm.value.end_time,
+      multiple_events_allowed: this.editBatchesForm.value.multiple_events_allowed
+    };
+    console.log(tmp);
+    this._service.editSlot(tmp)
+    .subscribe(
+      data =>  console.log('loaded'),
+      error => console.log(error)
+    );
+  }
+
+}
 
 
 //add-Departments

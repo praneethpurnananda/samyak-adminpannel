@@ -7,6 +7,7 @@
 </div>
 
 <br><br>
+
 <!-- <form novalidate [formGroup]="filterForm" #fform="ngForm">
 <mat-form-field>
   <mat-label>college</mat-label>
@@ -24,6 +25,28 @@
 <br> <br>
 <div class="table">
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="excel-table">
+<form novalidate class="example-form" style="padding: 0px 30px;"  [formGroup]="filterForm" #fform="ngForm">
+  <mat-form-field class="example-full-width-one" style="margin-left: 5px;" appearance="outline">
+    <mat-label>Department</mat-label>
+    <mat-select formControlName="department">
+      <mat-option *ngFor="let item of alldepartments" [value]="item.name">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="example-full-width-one" style="margin-left: 5px;" appearance="outline">
+    <mat-label>EventType</mat-label>
+    <mat-select formControlName="type">
+      <mat-option *ngFor="let item of allEventTypes" [value]="item.name">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    <button  mat-flat-button color="primary" style="margin: 5px;" class="add-btn" (click)="filter()">Filter</button>
+    <button  mat-flat-button color="primary" style="margin: 5px;" class="add-btn" (click)="resetFilter()">Reset</button>    
+</form>
+<div class="table"> 
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->

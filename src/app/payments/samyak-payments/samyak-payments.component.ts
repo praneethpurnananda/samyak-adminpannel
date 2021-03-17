@@ -10,7 +10,7 @@ import * as XLSX from 'xlsx';
 })
 export class SamyakPaymentsComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'Name' ,'College', 'Branch', 'Year'  , 'College Id' , 'Payment id' ];
+  displayedColumns: string[] = ['position', 'Name' ,'College', 'Branch', 'Year','Payment Date','College Id', 'Payment id' ];
   paymentsData;
   dataSource;
   filterForm:FormGroup;
@@ -32,7 +32,6 @@ export class SamyakPaymentsComponent implements OnInit {
         this.isLoading = false;
         this.paymentsData = data['payments'];
         this.dataSource = this.paymentsData;
-        //console.log(this.dataSource[0].user[0].name);
       },
       error =>{
         this.isLoading = false;
@@ -60,7 +59,7 @@ export class SamyakPaymentsComponent implements OnInit {
     this.dataSource=this.paymentsData;
     let filter=this.filterForm.value;
     for (var prop in filter) {
-      if(filter[prop]==="" || filter[prop]==="2"){
+      if(filter[prop]===""){
         continue;
       }
       else{
