@@ -19,6 +19,7 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { SamyakUsersComponent, EditUsers, ConformDelete, MoreInfo, SetPermissions, PaymentsData} from './samyak-users/samyak-users.component';
 
@@ -45,7 +46,8 @@ import { SamyakUsersComponent, EditUsers, ConformDelete, MoreInfo, SetPermission
     MatBottomSheetModule,
     MatListModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   entryComponents: [
    EditUsers,ConformDelete,MoreInfo,SetPermissions,PaymentsData

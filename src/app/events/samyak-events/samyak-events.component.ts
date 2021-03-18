@@ -54,7 +54,7 @@ export class SamyakEventsComponent implements OnInit {
 
         this.isLoading = false;
         //console.log(data)
-        console.log(data);
+        // console.log(data);
         this.allEvents = data;
         this.dataSource = this.allEvents;
       },
@@ -124,7 +124,7 @@ export class SamyakEventsComponent implements OnInit {
   filter () {
     this.dataSource=this.allEvents;
     let filter=this.filterForm.value;
-    console.log(filter);
+    // console.log(filter);
       if(filter.type!=="" && filter.type!==undefined){
         this.dataSource=this.dataSource.filter(x => x.type[0].name==filter.type);
       }
@@ -141,7 +141,7 @@ export class SamyakEventsComponent implements OnInit {
       data: {title: 'Add New Event Type'},
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("dialog was closed");
+      // console.log("dialog was closed");
     });
   }
 
@@ -151,7 +151,7 @@ export class SamyakEventsComponent implements OnInit {
       data: this.allEventTypes,
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("dialog was closed");
+      // console.log("dialog was closed");
     });
   }
 
@@ -161,7 +161,7 @@ export class SamyakEventsComponent implements OnInit {
       data: this.allEventTypes,
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("dialog was closed");
+      // console.log("dialog was closed");
       if(result){
         this.ngOnInit();
       }
@@ -335,7 +335,7 @@ export class AddEvent {
   _handleReaderLoaded(e) {
     let reader = e.target;
     this.imageSrc = reader.result;
-    console.log(this.imageSrc)
+    // console.log(this.imageSrc)
   }
 
 
@@ -348,7 +348,7 @@ export class AddEvent {
     }
 
     add(){
-      console.log(this.addEvent.value);
+      // console.log(this.addEvent.value);
       let tmp = {
         name: this.addEvent.value.name,
         department: this.addEvent.value.department,
@@ -391,9 +391,9 @@ export class AddCsvFile {
         let formData:FormData = new FormData();
 
         formData.append('newfile', this.selectedFile);
-        console.log(this.data.title);
+        // console.log(this.data.title);
         if(this.data.title == "event"){
-          console.log('inside event');
+          // console.log('inside event');
           this._service.uploadEventCsv(formData)
           .subscribe(
             data => console.log('loaded'),
@@ -401,7 +401,7 @@ export class AddCsvFile {
           );
         }
         else if(this.data.title == "techtalk"){
-          console.log('inside csv');
+          // console.log('inside csv');
           this._service.uploadTechTalkCsv(formData)
           .subscribe(
             data => console.log('loaded'),
@@ -412,7 +412,7 @@ export class AddCsvFile {
       }
 
       onFileInput(event){
-        console.log("eevnt teiggerd");
+        // console.log("eevnt teiggerd");
         this.selectedFile = event.target.files[0];
       }
 }
@@ -459,7 +459,7 @@ export class EditEvent {
   constructor(
     public dialogRef: MatDialogRef<EditEvent>,
       @Inject(MAT_DIALOG_DATA) public data,private fb: FormBuilder, private _service: AdminServiceService){
-        console.log(this.data);
+        // console.log(this.data);
 
         this._service.getDepartments()
         .subscribe(
@@ -495,7 +495,7 @@ export class EditEvent {
     _handleReaderLoaded(e) {
       let reader = e.target;
       this.imageSrc = reader.result;
-      console.log(this.imageSrc)
+      // console.log(this.imageSrc)
     }
 
 
@@ -646,7 +646,7 @@ export class Editslot{
     public dialogRef: MatDialogRef<EditEvent>,
       @Inject(MAT_DIALOG_DATA) public data,private fb: FormBuilder, private _service: AdminServiceService){
         // console.log(this.data);
-        console.log(this.data.formdata);
+        // console.log(this.data.formdata);
         this.editBatchesForm = this.fb.group({
           name: [{value: data.formdata.name , disabled: false},Validators.required],
           meet_link: [{value: data.formdata.meet_link , disabled: false},Validators.required],
@@ -672,7 +672,7 @@ export class Editslot{
       end_time: this.editBatchesForm.value.end_time,
       multiple_events_allowed: this.editBatchesForm.value.multiple_events_allowed
     };
-    console.log(tmp);
+    // console.log(tmp);
     this._service.editSlot(tmp)
     .subscribe(
       data =>  console.log('loaded'),
