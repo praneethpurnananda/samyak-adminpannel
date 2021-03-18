@@ -31,7 +31,7 @@
       <option value="">all</option>
       <option value="Male">Male</option>
       <option value="Female">Female</option>
-    </select> 
+    </select>
   </mat-form-field> -->
   <mat-form-field appearance="outline">
     <mat-label>college</mat-label>
@@ -61,6 +61,7 @@
   </div>
   <br> <br>
 <div class="table">
+  <h3>Showing <b> {{dataSource.length}} </b> results</h3> 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="excel-table">
 
   <!--- Note that these columns can be defined in any order.
@@ -107,7 +108,7 @@
     <th mat-header-cell *matHeaderCellDef> College Id </th>
     <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.college_id}} </td>
   </ng-container>
- 
+
   <ng-container matColumnDef="branch">
     <th mat-header-cell *matHeaderCellDef> Branch </th>
     <td mat-cell *matCellDef="let element" [ngClass]="{'test': !element.status}"> {{element.branch}} </td>

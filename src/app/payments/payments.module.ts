@@ -19,6 +19,7 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { SamyakPaymentsComponent } from './samyak-payments/samyak-payments.component';
 
@@ -45,7 +46,8 @@ import { SamyakPaymentsComponent } from './samyak-payments/samyak-payments.compo
     MatBottomSheetModule,
     MatListModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
 })
 export class PaymentsModule { }

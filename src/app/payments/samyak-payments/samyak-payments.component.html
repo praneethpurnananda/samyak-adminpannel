@@ -1,3 +1,5 @@
+<!-- <mat-progress-bar mode="indeterminate" *ngIf="isFiltering"></mat-progress-bar> -->
+
 <br>
 <br>
 <form novalidate [formGroup]="filterForm" #fform="ngForm" class="filter">
@@ -16,7 +18,7 @@
 </form>
 <br>
 <div class="btn">
-  <button mat-flat-button color="primary" (click)="filterPayments()">filter</button>
+  <button mat-flat-button color="primary" (click)="filterPayments()">Filter</button>
 </div>
 <br><br>
 <div class="loader" *ngIf="isLoading; else loaded">
@@ -28,6 +30,7 @@
 </div>
 <br> <br>
 <div class="table">
+  <h3>Showing <b> {{dataSource.length}} </b> results</h3>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="excel-table">
 
   <!--- Note that these columns can be defined in any order.

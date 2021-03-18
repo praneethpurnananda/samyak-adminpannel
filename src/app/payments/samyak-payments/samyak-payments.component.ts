@@ -16,6 +16,7 @@ export class SamyakPaymentsComponent implements OnInit {
   filterForm:FormGroup;
   fileName= 'PaymentsData.xlsx';
   isLoading:boolean = true;
+  //isFiltering:boolean = false;
   constructor(private _service : AdminServiceService,private fb:FormBuilder) {
     this.filterForm = this.fb.group({
       college:[''],
@@ -25,6 +26,7 @@ export class SamyakPaymentsComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    //this.isFiltering = false;
     this.isLoading = true;
     this._service.paymentsData()
     .subscribe(
@@ -56,6 +58,7 @@ export class SamyakPaymentsComponent implements OnInit {
 
 
   filterPayments () {
+    //this.isFiltering = true;
     this.dataSource=this.paymentsData;
     let filter=this.filterForm.value;
     for (var prop in filter) {
@@ -64,8 +67,10 @@ export class SamyakPaymentsComponent implements OnInit {
       }
       else{
         this.dataSource=this.dataSource.filter(x => x.user[0][prop]==filter[prop]);
+        //this.isFiltering = false;
       }
     }
+
   }
 }
 

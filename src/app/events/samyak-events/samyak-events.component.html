@@ -43,11 +43,12 @@
     </mat-select>
   </mat-form-field>
     <button  mat-flat-button color="primary" style="margin: 5px;" class="add-btn" (click)="filter()">Filter</button>
-    <button  mat-flat-button color="primary" style="margin: 5px;" class="add-btn" (click)="resetFilter()">Reset</button>    
+    <button  mat-flat-button color="primary" style="margin: 5px;" class="add-btn" (click)="resetFilter()">Reset</button>
 </form>
 </table>
 </div> -->
-<div class="table"> 
+<div class="table">
+  <h3>Showing <b> {{dataSource.length}} </b> results</h3> 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
